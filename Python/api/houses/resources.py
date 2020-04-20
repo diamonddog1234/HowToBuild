@@ -63,10 +63,12 @@ class DeleteHouse(Resource):
         json_data = request.get_json()
         if 'house_id' not in json_data:
             return jsonify({'msg': 'no_house_id'})
-        house_id = json_data['house_id']
+        house_id = int(json_data['house_id'])
         db_house = get_database_session().query(House).\
             filter(House.id == house_id).\
             first()
         if not db_house:
             return jsonify({'msg': 'NO_HOUSE'})
+        get_database_session().delete(db_house)
+        get_database_session().commit()
         return jsonify({'msg': 'OK'})
