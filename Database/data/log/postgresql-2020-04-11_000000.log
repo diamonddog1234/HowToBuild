@@ -1,0 +1,289 @@
+2020-04-11 00:21:18.436 GMT [9512] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:21:18.436 GMT [10340] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:21:40.220 GMT [6224] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:21:45.610 GMT [14856] ОШИБКА:  нулевое значение в столбце "login" нарушает ограничение NOT NULL
+2020-04-11 00:21:45.610 GMT [14856] ПОДРОБНОСТИ:  Ошибочная строка содержит (117, null, null, null).
+2020-04-11 00:21:45.610 GMT [14856] ОПЕРАТОР:  INSERT INTO public.users (login, password_hash, email) VALUES (NULL, NULL, NULL) RETURNING public.users.id
+2020-04-11 00:22:50.718 GMT [14856] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:24:24.116 GMT [12808] ОШИБКА:  нулевое значение в столбце "login" нарушает ограничение NOT NULL
+2020-04-11 00:24:24.116 GMT [12808] ПОДРОБНОСТИ:  Ошибочная строка содержит (118, null, null, null).
+2020-04-11 00:24:24.116 GMT [12808] ОПЕРАТОР:  INSERT INTO public.users (login, password_hash, email) VALUES (NULL, NULL, NULL) RETURNING public.users.id
+2020-04-11 00:26:41.597 GMT [12808] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:27:00.575 GMT [5228] ОШИБКА:  нулевое значение в столбце "login" нарушает ограничение NOT NULL
+2020-04-11 00:27:00.575 GMT [5228] ПОДРОБНОСТИ:  Ошибочная строка содержит (119, null, null, null).
+2020-04-11 00:27:00.575 GMT [5228] ОПЕРАТОР:  INSERT INTO public.users (login, password_hash, email) VALUES (NULL, NULL, NULL) RETURNING public.users.id
+2020-04-11 00:27:25.376 GMT [5228] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:27:36.975 GMT [15320] ОШИБКА:  нулевое значение в столбце "login" нарушает ограничение NOT NULL
+2020-04-11 00:27:36.975 GMT [15320] ПОДРОБНОСТИ:  Ошибочная строка содержит (120, null, null, null).
+2020-04-11 00:27:36.975 GMT [15320] ОПЕРАТОР:  INSERT INTO public.users (login, password_hash, email) VALUES (NULL, NULL, NULL) RETURNING public.users.id
+2020-04-11 00:29:11.156 GMT [15320] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:32:20.301 GMT [9200] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:32:20.301 GMT [7376] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:32:20.302 GMT [9200] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 00:32:20.302 GMT [7376] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 00:32:35.310 GMT [5260] ОШИБКА:  нулевое значение в столбце "login" нарушает ограничение NOT NULL
+2020-04-11 00:32:35.310 GMT [5260] ПОДРОБНОСТИ:  Ошибочная строка содержит (121, null, null, null).
+2020-04-11 00:32:35.310 GMT [5260] ОПЕРАТОР:  INSERT INTO public.users (login, password_hash, email) VALUES (NULL, NULL, NULL) RETURNING public.users.id
+2020-04-11 00:35:07.524 GMT [5260] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:35:26.041 GMT [4500] ОШИБКА:  INSERT или UPDATE в таблице "user_personals" нарушает ограничение внешнего ключа "user_personals_user_id_fkey"
+2020-04-11 00:35:26.041 GMT [4500] ПОДРОБНОСТИ:  Ключ (user_id)=(2) отсутствует в таблице "users".
+2020-04-11 00:35:26.041 GMT [4500] ОПЕРАТОР:  INSERT INTO public.user_personals (user_id, first_name, second_name, phone) VALUES (2, NULL, NULL, NULL)
+2020-04-11 00:35:28.077 GMT [12648] ОШИБКА:  INSERT или UPDATE в таблице "user_personals" нарушает ограничение внешнего ключа "user_personals_user_id_fkey"
+2020-04-11 00:35:28.077 GMT [12648] ПОДРОБНОСТИ:  Ключ (user_id)=(2) отсутствует в таблице "users".
+2020-04-11 00:35:28.077 GMT [12648] ОПЕРАТОР:  INSERT INTO public.user_personals (user_id, first_name, second_name, phone) VALUES (2, NULL, NULL, NULL)
+2020-04-11 00:35:28.702 GMT [5448] ОШИБКА:  INSERT или UPDATE в таблице "user_personals" нарушает ограничение внешнего ключа "user_personals_user_id_fkey"
+2020-04-11 00:35:28.702 GMT [5448] ПОДРОБНОСТИ:  Ключ (user_id)=(2) отсутствует в таблице "users".
+2020-04-11 00:35:28.702 GMT [5448] ОПЕРАТОР:  INSERT INTO public.user_personals (user_id, first_name, second_name, phone) VALUES (2, NULL, NULL, NULL)
+2020-04-11 00:35:46.763 GMT [12648] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:35:46.763 GMT [5448] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 00:35:46.763 GMT [4500] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 08:55:51.290 GMT [10848] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 08:55:51.290 GMT [1512] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 08:55:51.290 GMT [11388] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 09:12:48.677 GMT [6240] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 09:12:48.677 GMT [13328] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 09:50:15.214 GMT [5552] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 09:50:15.214 GMT [16088] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:17:47.775 GMT [16208] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:22:00.501 GMT [2528] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:23:01.607 GMT [7884] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:23:23.198 GMT [7916] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:25:43.116 GMT [6808] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:27:32.014 GMT [14416] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:27:47.346 GMT [15992] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:31:56.729 GMT [16428] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:39:05.390 GMT [10052] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:48:45.482 GMT [7960] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:49:35.216 GMT [16916] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:51:14.144 GMT [14376] ОШИБКА:  нулевое значение в столбце "id" нарушает ограничение NOT NULL
+2020-04-11 10:51:14.144 GMT [14376] ПОДРОБНОСТИ:  Ошибочная строка содержит (null, diamonddog1234, pbkdf2:sha256:150000$reGvvcaM$856f0c1077136bf2cae94f652f32b1aa60..., ).
+2020-04-11 10:51:14.144 GMT [14376] ОПЕРАТОР:  UPDATE public.users SET id=NULL, password_hash='pbkdf2:sha256:150000$reGvvcaM$856f0c1077136bf2cae94f652f32b1aa600c795a53f46cda0f571e1706f5861e' WHERE public.users.id = 79
+2020-04-11 10:51:59.154 GMT [14376] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 10:52:01.762 GMT [15392] ОШИБКА:  неверный синтаксис для типа bigint: "nextval('public.users_id_seq'::regclass)" (символ 28)
+2020-04-11 10:52:01.762 GMT [15392] ОПЕРАТОР:  UPDATE public.users SET id='nextval(''public.users_id_seq''::regclass)', password_hash='pbkdf2:sha256:150000$V4oa3CY6$2502eb9997474db21042db689db29bbc65144c86991225b1261d654f63f77ec8' WHERE public.users.id = 79
+2020-04-11 10:52:17.602 GMT [15392] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 11:00:05.612 GMT [16928] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 11:01:11.666 GMT [14320] ОШИБКА:  UPDATE или DELETE в таблице "users" нарушает ограничение внешнего ключа "user_personals_user_id_fkey" таблицы "user_personals"
+2020-04-11 11:01:11.666 GMT [14320] ПОДРОБНОСТИ:  На ключ (id)=(79) всё ещё есть ссылки в таблице "user_personals".
+2020-04-11 11:01:11.666 GMT [14320] ОПЕРАТОР:  UPDATE public.users SET id=nextval('users_id_seq'), password_hash='pbkdf2:sha256:150000$cp8OzoeR$f4158ab637e4d3eae07cf94f7d9b148d2a7a197226883800f046bc8cd56c9bc4' WHERE public.users.id = 79 RETURNING public.users.id
+2020-04-11 11:02:25.319 GMT [14320] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 11:14:17.356 GMT [9740] ОШИБКА:  столбец "directory_path_index" содержит значения NULL
+2020-04-11 11:14:17.356 GMT [9740] ОПЕРАТОР:  ALTER TABLE public.user_personals
+	    ADD COLUMN directory_path_index bigint NOT NULL;
+2020-04-11 11:30:04.144 GMT [14880] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 11:50:46.530 GMT [13260] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 11:59:29.020 GMT [8044] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 11:59:47.470 GMT [14700] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:01:16.199 GMT [12484] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:01:42.403 GMT [7348] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:02:31.974 GMT [1348] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:06:03.077 GMT [17084] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:19:27.354 GMT [15780] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:19:57.213 GMT [14388] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:20:10.470 GMT [8092] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:20:10.471 GMT [8092] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:20:36.284 GMT [16544] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:20:36.285 GMT [16544] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:22:32.203 GMT [14024] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:22:32.203 GMT [14024] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:22:46.502 GMT [6416] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:22:46.502 GMT [6416] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:26:16.158 GMT [1348] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:26:16.158 GMT [16444] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:26:16.158 GMT [1348] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:31:28.771 GMT [12456] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:31:59.348 GMT [13516] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:31:59.348 GMT [13516] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:32:52.298 GMT [4080] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:32:52.298 GMT [4080] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:33:18.563 GMT [6400] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:33:18.564 GMT [6400] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:33:56.468 GMT [8760] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:33:56.468 GMT [16704] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:33:56.468 GMT [8760] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:33:56.468 GMT [16704] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:34:10.462 GMT [5288] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:34:10.462 GMT [5288] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:35:19.398 GMT [9076] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:35:19.398 GMT [9076] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:35:54.652 GMT [2032] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:36:00.679 GMT [5496] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:36:23.781 GMT [16424] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:36:23.781 GMT [9156] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:36:23.781 GMT [16424] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:36:23.781 GMT [9156] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:36:34.940 GMT [14248] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:36:34.940 GMT [14248] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:36:47.001 GMT [17084] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:36:47.001 GMT [11920] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:36:47.001 GMT [11920] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:36:47.001 GMT [17084] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:37:02.152 GMT [1164] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:37:20.592 GMT [15604] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:37:20.593 GMT [15604] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:37:54.064 GMT [2032] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:37:54.064 GMT [2032] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:38:26.821 GMT [5152] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:38:26.821 GMT [5152] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:38:56.929 GMT [12460] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:38:56.929 GMT [12460] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:39:20.642 GMT [5556] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:39:20.642 GMT [5556] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:39:32.840 GMT [7280] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:39:32.841 GMT [7280] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:39:39.941 GMT [15820] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:39:39.941 GMT [15820] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:40:05.668 GMT [14540] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:40:35.467 GMT [1520] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:41:22.974 GMT [14448] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:41:44.560 GMT [5888] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:41:44.560 GMT [5888] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:43:31.084 GMT [17328] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:43:45.370 GMT [14412] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:43:45.370 GMT [14412] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:44:35.121 GMT [5000] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:44:35.121 GMT [5152] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:44:35.121 GMT [5152] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:45:59.671 GMT [5288] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:45:59.671 GMT [15256] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:45:59.671 GMT [5288] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:45:59.671 GMT [15256] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:46:26.541 GMT [9160] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:46:26.541 GMT [9160] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:46:26.541 GMT [7748] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:46:26.541 GMT [7748] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:46:50.027 GMT [16352] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:46:50.027 GMT [7252] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:46:50.027 GMT [16352] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:46:50.027 GMT [7252] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 12:47:04.315 GMT [13192] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:47:18.618 GMT [3444] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:47:54.457 GMT [9480] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:49:08.745 GMT [6352] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:51:45.382 GMT [15252] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:52:37.385 GMT [7408] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:52:39.780 GMT [876] ОШИБКА:  отношение "token_id_seq" не существует (символ 154)
+2020-04-11 12:52:39.780 GMT [876] ОПЕРАТОР:  UPDATE public.users SET password_hash='pbkdf2:sha256:150000$Xkwd3B2x$58e6a7aa2ac44bbc465a706c04ee9405ac51a2b6837790754767e4bf53c19dcc', token_id=nextval('token_id_seq') WHERE public.users.id = 127
+2020-04-11 12:54:21.720 GMT [876] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 12:54:52.676 GMT [5180] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 13:03:52.848 GMT [17016] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 13:05:29.071 GMT [17200] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 13:05:33.992 GMT [14572] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 13:05:33.992 GMT [14572] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-11 13:27:18.076 GMT [9396] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 13:39:38.682 GMT [9004] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 13:39:38.682 GMT [8492] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 13:59:47.552 GMT [6244] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 13:59:47.552 GMT [9160] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 14:13:33.997 GMT [4068] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 14:13:33.997 GMT [11756] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 14:33:30.386 GMT [17112] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-11 14:33:30.386 GMT [12468] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	

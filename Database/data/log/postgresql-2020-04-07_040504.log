@@ -1,0 +1,334 @@
+2020-04-07 04:05:04.894 GMT [5064] ���������:  ������ ������� �� ���� ��������; ��������� ������ ������: 2020-04-05 21:21:44 GMT
+2020-04-07 04:05:05.335 GMT [5064] ���������:  ������� �� ���� ����������� ��������; ������������ �������������� ��������������
+2020-04-07 04:05:05.337 GMT [5064] ���������:  ������ REDO ���������� �� �������� 0/2C309A8
+2020-04-07 04:05:05.337 GMT [5064] ���������:  �������� ����� ������ �� �������� 0/2C30A90: ��������� 24, �������� 0
+2020-04-07 04:05:05.337 GMT [5064] ���������:  ������ REDO ���������� �� �������� 0/2C30A58
+2020-04-07 04:05:05.361 GMT [2840] ���������:  ������� �� ������ ��������� �����������
+2020-04-07 04:41:09.392 GMT [7724] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 04:53:52.218 GMT [7352] ОШИБКА:  столбец tests.test_type_id не существует (символ 140)
+2020-04-07 04:53:52.218 GMT [7352] ОПЕРАТОР:  SELECT public.tests.id AS public_tests_id, public.tests.value AS public_tests_value, public.tests.description AS public_tests_description, public.tests.test_type_id AS public_tests_test_type_id 
+	FROM public.tests 
+	WHERE public.tests.id = 84 
+	 LIMIT 1
+2020-04-07 04:55:00.470 GMT [7352] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 04:58:14.145 GMT [11616] ОШИБКА:  роль "diamonddog1234" не существует
+2020-04-07 04:58:14.145 GMT [11616] ОПЕРАТОР:  ALTER TABLE public.test_random_answers OWNER TO diamonddog1234;
+	
+	
+2020-04-07 05:02:06.074 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:02:06.074 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id),
+	    FOREIGN KEY (test_id)
+	        REFERENCES public.tests (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	);
+	
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:02:08.736 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:02:08.736 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id),
+	    FOREIGN KEY (test_id)
+	        REFERENCES public.tests (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	);
+	
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:02:16.540 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:02:16.540 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id)
+	);
+	
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:03:39.460 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:03:39.460 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id),
+	    FOREIGN KEY (test_id)
+	        REFERENCES public.tests (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	);
+	
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:03:42.283 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:03:42.283 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id),
+	    FOREIGN KEY (test_id)
+	        REFERENCES public.tests (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	);
+	
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:03:55.553 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:03:55.553 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id),
+	    FOREIGN KEY (test_id)
+	        REFERENCES public.tests (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	);
+	
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:04:21.789 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:04:21.789 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id),
+	    FOREIGN KEY (test_id)
+	        REFERENCES public.tests (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	);
+	
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:05:09.657 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:05:09.657 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id),
+	    FOREIGN KEY (test_id)
+	        REFERENCES public.tests (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	)
+	
+	TABLESPACE pg_default;
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:06:05.871 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:06:05.871 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id),
+	    FOREIGN KEY (test_id)
+	        REFERENCES public.tests (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	)
+	
+	TABLESPACE pg_default;
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:06:19.315 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:06:19.315 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id)
+	)
+	
+	TABLESPACE pg_default;
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:06:51.773 GMT [13552] ОШИБКА:  отношение "test_random_answers" уже существует
+2020-04-07 05:06:51.773 GMT [13552] ОПЕРАТОР:  CREATE TABLE public.test_random_answers
+	(
+	    test_id bigint,
+	    answer_count bigint NOT NULL,
+	    PRIMARY KEY (test_id)
+	)
+	
+	TABLESPACE pg_default;
+	
+	ALTER TABLE public.test_random_answers
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-04-07 05:08:42.224 GMT [13268] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:12:43.161 GMT [8760] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:13:07.812 GMT [5972] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:13:20.046 GMT [11128] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:13:20.047 GMT [11128] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:13:56.979 GMT [14256] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:15:27.425 GMT [11732] ОШИБКА:  отношение "public.test_random_question" не существует (символ 403)
+2020-04-07 05:15:27.425 GMT [11732] ОПЕРАТОР:  SELECT public.tests.id AS public_tests_id, public.tests.value AS public_tests_value, public.tests.description AS public_tests_description, public.tests.interpetation_method_id AS public_tests_interpetation_method_id, public.test_random_question.test_id AS public_test_random_question_test_id, public.test_random_question.answer_count AS public_test_random_question_answer_count 
+	FROM public.tests JOIN public.test_random_question ON public.tests.id = public.test_random_question.test_id 
+	WHERE public.test_random_question.test_id = 84 
+	 LIMIT 1
+2020-04-07 05:16:06.701 GMT [11732] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:16:45.631 GMT [3756] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:16:45.631 GMT [5572] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:16:45.631 GMT [5572] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:16:45.631 GMT [3756] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:20:14.451 GMT [11116] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:23:40.232 GMT [13092] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:23:40.232 GMT [13092] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:24:07.915 GMT [13420] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:24:07.916 GMT [13420] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:24:07.915 GMT [5648] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:24:07.916 GMT [5648] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:24:26.361 GMT [4088] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:24:35.506 GMT [9784] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:24:35.506 GMT [9784] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:25:05.137 GMT [13080] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:25:05.137 GMT [13080] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:25:05.137 GMT [8592] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:25:05.138 GMT [8592] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:29:05.584 GMT [6036] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:30:11.174 GMT [7740] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:30:11.174 GMT [7740] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:30:41.264 GMT [1144] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:30:41.264 GMT [9784] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:30:41.264 GMT [1144] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:30:41.264 GMT [9784] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:31:04.640 GMT [12664] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:31:04.641 GMT [12664] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:31:04.640 GMT [12016] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:31:04.641 GMT [12016] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 05:31:18.910 GMT [9856] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 05:31:18.910 GMT [9856] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-04-07 08:56:24.151 GMT [10116] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 08:56:24.152 GMT [5728] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 09:20:03.381 GMT [9652] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 10:21:34.635 GMT [7800] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 10:49:19.947 GMT [9152] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 11:02:08.361 GMT [14280] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-04-07 11:30:57.090 GMT [2840] ���������:  ������� ������ �� ������� ����������
+2020-04-07 11:30:57.092 GMT [2840] ���������:  ���������� ���� �������� ����������
+2020-04-07 11:30:57.093 GMT [13552] ВАЖНО:  закрытие подключения по команде администратора
+2020-04-07 11:30:57.097 GMT [2840] ���������:  ������� ������� "logical replication launcher" (PID 11040) ���������� � ����� ������ 1
+2020-04-07 11:30:57.101 GMT [11564] ���������:  ����������
+2020-04-07 11:30:57.118 GMT [2840] ���������:  ������� �� ���������

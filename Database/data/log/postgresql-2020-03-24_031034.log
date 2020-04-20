@@ -1,0 +1,1284 @@
+2020-03-24 03:10:34.282 GMT [13252] ���������:  ������� �� ���� ���������: 2020-03-23 13:09:50 GMT
+2020-03-24 03:10:34.298 GMT [10780] ���������:  ������� �� ������ ��������� �����������
+2020-03-24 03:27:07.809 GMT [10736] ОШИБКА:  столбец "igv.test_id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 8)
+2020-03-24 03:27:07.809 GMT [10736] ОПЕРАТОР:  SELECT *
+	
+	FROM public.interpetation_groups_view IGV
+	GROUP BY IGV.interpretation_group_id
+2020-03-24 03:33:25.269 GMT [10736] ОШИБКА:  столбец "igv.interpretation_group" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 41)
+2020-03-24 03:33:25.269 GMT [10736] ОПЕРАТОР:  SELECT IGV.interpretation_group_id,
+		   IGV.interpretation_group,
+		   sum(IGV.answer_value)
+	
+	FROM public.interpetation_groups_view IGV
+	GROUP BY IGV.interpretation_group_id
+2020-03-24 03:33:25.888 GMT [10736] ОШИБКА:  столбец "igv.interpretation_group" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 41)
+2020-03-24 03:33:25.888 GMT [10736] ОПЕРАТОР:  SELECT IGV.interpretation_group_id,
+		   IGV.interpretation_group,
+		   sum(IGV.answer_value)
+	
+	FROM public.interpetation_groups_view IGV
+	GROUP BY IGV.interpretation_group_id
+2020-03-24 03:35:26.858 GMT [10736] ОШИБКА:  столбец "igv.test_id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 13)
+2020-03-24 03:35:26.858 GMT [10736] ОПЕРАТОР:  SELECT 
+		   *
+	
+	FROM public.interpetation_groups_view IGV
+	GROUP BY IGV.interpretation_group_id, IGV.interpretation_group, IGV.user_id, IGV.user_login
+2020-03-24 03:35:49.032 GMT [10736] ОШИБКА:  ошибка синтаксиса (примерное положение: "IGV") (символ 1)
+2020-03-24 03:35:49.032 GMT [10736] ОПЕРАТОР:  IGV.user_login,
+2020-03-24 04:07:07.831 GMT [6868] ОШИБКА:  столбец "igv.test_id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 121)
+2020-03-24 04:07:07.831 GMT [6868] ОПЕРАТОР:  CREATE OR REPLACE VIEW public.user_interpretation_group_results
+	    WITH (security_barrier=false)
+	    AS
+	     SELECT 
+	 	igv.test_id,
+		igv.test,
+	 	igv.user_id,
+	    igv.user_login,
+	    igv.interpretation_group_id,
+	    igv.interpretation_group,
+	    sum(igv.answer_value) AS sum
+	   FROM interpetation_groups_view igv
+	  GROUP BY igv.interpretation_group_id, igv.interpretation_group, igv.user_id, igv.user_login;
+2020-03-24 04:07:45.066 GMT [6868] ОШИБКА:  столбец "igv_test" не существует (символ 432)
+2020-03-24 04:07:45.066 GMT [6868] ОПЕРАТОР:  CREATE OR REPLACE VIEW public.user_interpretation_group_results
+	    WITH (security_barrier=false)
+	    AS
+	     SELECT 
+	 	igv.test_id,
+		igv.test,
+	 	igv.user_id,
+	    igv.user_login,
+	    igv.interpretation_group_id,
+	    igv.interpretation_group,
+	    sum(igv.answer_value) AS sum
+	   FROM interpetation_groups_view igv
+	  GROUP BY igv.interpretation_group_id, 
+	  	igv.interpretation_group, 
+		igv.user_id, 
+		igv.user_login,
+		igv.test_id,
+		igv_test;
+2020-03-24 04:07:49.405 GMT [6868] ОШИБКА:  изменить имя столбца "user_id" на "test_id" в представлении нельзя
+2020-03-24 04:07:49.405 GMT [6868] ОПЕРАТОР:  CREATE OR REPLACE VIEW public.user_interpretation_group_results
+	    WITH (security_barrier=false)
+	    AS
+	     SELECT 
+	 	igv.test_id,
+		igv.test,
+	 	igv.user_id,
+	    igv.user_login,
+	    igv.interpretation_group_id,
+	    igv.interpretation_group,
+	    sum(igv.answer_value) AS sum
+	   FROM interpetation_groups_view igv
+	  GROUP BY igv.interpretation_group_id, 
+	  	igv.interpretation_group, 
+		igv.user_id, 
+		igv.user_login,
+		igv.test_id,
+		igv.test;
+2020-03-24 04:09:40.750 GMT [8948] ОШИБКА:  отношение "public.i" не существует (символ 15)
+2020-03-24 04:09:40.750 GMT [8948] ОПЕРАТОР:  SELECT * FROM public.i
+	
+2020-03-24 04:16:25.727 GMT [3132] ОШИБКА:  ошибка синтаксиса (примерное положение: "WHERE") (символ 605)
+2020-03-24 04:16:25.727 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 GROUP BY ua.date
+	  WHERE t.interpetation_method_id = 1;
+2020-03-24 04:16:36.248 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:16:36.248 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY ua.date
+2020-03-24 04:16:48.609 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:16:48.609 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY ua
+2020-03-24 04:16:49.157 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:16:49.157 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY ua
+2020-03-24 04:16:54.810 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:16:54.810 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY ua,t
+2020-03-24 04:16:55.303 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:16:55.303 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY ua,t
+2020-03-24 04:16:58.504 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:16:58.504 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY t
+2020-03-24 04:16:58.817 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:16:58.817 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY t
+2020-03-24 04:16:58.936 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:16:58.936 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY t
+2020-03-24 04:17:20.450 GMT [3132] ОШИБКА:  ошибка синтаксиса (примерное положение: "AS") (символ 648)
+2020-03-24 04:17:20.450 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY     t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+2020-03-24 04:17:21.080 GMT [3132] ОШИБКА:  ошибка синтаксиса (примерное положение: "AS") (символ 648)
+2020-03-24 04:17:21.080 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY     t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+2020-03-24 04:17:39.538 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:17:39.538 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY t.value,
+	    a.id,
+	    a.value ,
+	    aiig.value,
+	    ig.id,
+	    ig.value,
+	    u.id,
+	    u.login
+2020-03-24 04:17:39.983 GMT [3132] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 9)
+2020-03-24 04:17:39.983 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY t.value,
+	    a.id,
+	    a.value ,
+	    aiig.value,
+	    ig.id,
+	    ig.value,
+	    u.id,
+	    u.login
+2020-03-24 04:20:01.342 GMT [3132] ОШИБКА:  ошибка синтаксиса (примерное положение: "ua") (символ 249)
+2020-03-24 04:20:01.342 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login
+		ua.date
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY 
+	    t.id,
+	    t.value,
+	    a.id,
+	    a.value ,
+	    aiig.value,
+	    ig.id,
+	    ig.value,
+	    u.id,
+	    u.login
+2020-03-24 04:20:04.816 GMT [3132] ОШИБКА:  столбец "ua.date" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 250)
+2020-03-24 04:20:04.816 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login,
+		ua.date
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY 
+	    t.id,
+	    t.value,
+	    a.id,
+	    a.value ,
+	    aiig.value,
+	    ig.id,
+	    ig.value,
+	    u.id,
+	    u.login
+2020-03-24 04:20:05.355 GMT [3132] ОШИБКА:  столбец "ua.date" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 250)
+2020-03-24 04:20:05.355 GMT [3132] ОПЕРАТОР:   SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login,
+		ua.date
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+		 
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY 
+	    t.id,
+	    t.value,
+	    a.id,
+	    a.value ,
+	    aiig.value,
+	    ig.id,
+	    ig.value,
+	    u.id,
+	    u.login
+2020-03-24 04:26:08.412 GMT [13664] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 04:30:44.424 GMT [6868] ОШИБКА:  изменить имя столбца "sum" на "value" в представлении нельзя
+2020-03-24 04:30:44.424 GMT [6868] ОПЕРАТОР:  CREATE OR REPLACE VIEW public.user_interpretation_group_results
+	    WITH (security_barrier=false)
+	    AS
+	     SELECT igv.user_id,
+	    igv.user_login,
+	    igv.test_id,
+	    igv.test,
+	    igv.interpretation_group_id,
+	    igv.interpretation_group,
+	    sum(igv.answer_value) AS value
+	   FROM interpetation_groups_view igv
+	  GROUP BY igv.interpretation_group_id, igv.interpretation_group, igv.user_id, igv.user_login, igv.test_id, igv.test;
+2020-03-24 04:42:20.975 GMT [12412] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 8)
+2020-03-24 04:42:20.975 GMT [12412] ОПЕРАТОР:  SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login,
+	    max(ua.date) AS date
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+	  WHERE t.interpetation_method_id = 1
+	
+2020-03-24 04:42:34.320 GMT [12412] ОШИБКА:  ошибка синтаксиса (примерное положение: "GROUP") (символ 3)
+2020-03-24 04:42:34.320 GMT [12412] ОПЕРАТОР:    GROUP BY t.id, t.value, a.id, a.value, aiig.value, ig.id, ig.value, u.id, u.login;
+2020-03-24 04:42:38.848 GMT [12412] ОШИБКА:  столбец "t.id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 8)
+2020-03-24 04:42:38.848 GMT [12412] ОПЕРАТОР:  SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login,
+	    max(ua.date) AS date
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+	  WHERE t.interpetation_method_id = 1
+	
+2020-03-24 04:46:41.416 GMT [7440] ОШИБКА:  ошибка синтаксиса (примерное положение: "max") (символ 171)
+2020-03-24 04:46:41.416 GMT [7440] ОПЕРАТОР:  SELECT igv.user_id,
+	    igv.user_login,
+	    igv.test_id,
+	    igv.test,
+	    igv.interpretation_group_id,
+	    igv.interpretation_group,
+	    sum(igv.answer_value) AS value
+		max(igv.date)
+	   FROM interpetation_groups_view igv
+	  GROUP BY igv.interpretation_group_id, igv.interpretation_group, igv.user_id, igv.user_login, igv.test_id, igv.test, igv.date;
+2020-03-24 04:49:56.618 GMT [6868] ОШИБКА:  столбец "ua.date" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 354)
+2020-03-24 04:49:56.618 GMT [6868] ОПЕРАТОР:  CREATE OR REPLACE VIEW public.interpetation_groups_view
+	    WITH (security_barrier=false)
+	    AS
+	     SELECT t.id AS test_id,
+	    t.value AS test,
+	    a.id AS answer_id,
+	    a.value AS answer,
+	    aiig.value AS answer_value,
+	    ig.id AS interpretation_group_id,
+	    ig.value AS interpretation_group,
+	    u.id AS user_id,
+	    u.login AS user_login,
+	    ua.date AS date
+	   FROM tests t
+	     JOIN questions q ON t.id = q.test_id
+	     JOIN answers a ON a.question_id = q.id
+	     JOIN answers_in_interpetation_groups aiig ON aiig.answer_id = a.id
+	     JOIN interpretation_groups ig ON aiig.interpetation_group_id = ig.id
+	     JOIN user_answers ua ON ua.answer_id = a.id
+	     JOIN users u ON u.id = ua.user_id
+	  WHERE t.interpetation_method_id = 1
+	  GROUP BY t.id, t.value, a.id, a.value, aiig.value, ig.id, ig.value, u.id, u.login;
+2020-03-24 04:52:46.205 GMT [6868] ОШИБКА:  изменить тип столбца, задействованного в представлении или правиле, нельзя
+2020-03-24 04:52:46.205 GMT [6868] ПОДРОБНОСТИ:  правило _RETURN для отношения представление interpetation_groups_view зависит от столбца "date"
+2020-03-24 04:52:46.205 GMT [6868] ОПЕРАТОР:  ALTER TABLE public.user_answers
+	    ALTER COLUMN date TYPE timestamp without time zone ;
+2020-03-24 04:54:29.764 GMT [7440] ОШИБКА:  отношение "interpetation_groups_view" не существует (символ 189)
+2020-03-24 04:54:29.764 GMT [7440] ОПЕРАТОР:  SELECT igv.user_id,
+	    igv.user_login,
+	    igv.test_id,
+	    igv.test,
+	    igv.interpretation_group_id,
+	    igv.interpretation_group,
+	    sum(igv.answer_value) AS value,
+		igv.date
+	   FROM interpetation_groups_view igv
+	  GROUP BY igv.interpretation_group_id, igv.interpretation_group, igv.user_id, igv.user_login, igv.test_id, igv.test, igv.date;
+2020-03-24 05:21:56.283 GMT [11908] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:23:34.616 GMT [2280] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:32:25.639 GMT [3336] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:32:35.000 GMT [7300] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:33:09.438 GMT [5556] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:33:41.254 GMT [15032] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:33:51.134 GMT [1952] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:33:51.134 GMT [1952] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 05:34:17.196 GMT [9732] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:34:17.197 GMT [9732] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 05:34:29.356 GMT [11380] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:34:29.357 GMT [11380] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 05:34:32.537 GMT [12608] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:34:32.538 GMT [12608] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 05:34:53.103 GMT [9696] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:36:02.313 GMT [15280] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:37:25.139 GMT [11500] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:39:20.302 GMT [1228] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:43:03.494 GMT [6924] ОШИБКА:  столбец "user_interpretation_group_results_view.test_id" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 8)
+2020-03-24 05:43:03.494 GMT [6924] ОПЕРАТОР:  SELECT public.user_interpretation_group_results_view.test_id AS public_user_interpretation_group_results_view_test_id, public.user_interpretation_group_results_view.user_id AS public_user_interpretation_group_results_view_user_id, max(public.user_interpretation_group_results_view.date) AS max_1 
+	FROM public.user_interpretation_group_results_view 
+	WHERE public.user_interpretation_group_results_view.test_id = 6 AND public.user_interpretation_group_results_view.user_id = 2
+2020-03-24 05:44:39.721 GMT [6924] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:45:38.030 GMT [7136] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:45:38.030 GMT [7136] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 05:46:21.466 GMT [6576] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:46:21.466 GMT [6576] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 05:46:42.889 GMT [3548] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:46:56.583 GMT [7312] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 05:57:44.449 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "range") (символ 158)
+2020-03-24 05:57:44.449 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.interpretation_groups IG
+		on IGT.interpretation_group_id = IG.id
+	WHERE IG.value in range(1,10)
+			
+			
+2020-03-24 05:57:44.921 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "range") (символ 158)
+2020-03-24 05:57:44.921 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.interpretation_groups IG
+		on IGT.interpretation_group_id = IG.id
+	WHERE IG.value in range(1,10)
+			
+			
+2020-03-24 05:57:53.865 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "range") (символ 155)
+2020-03-24 05:57:53.865 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.interpretation_groups IG
+		on IGT.interpretation_group_id = IG.id
+	WHERE IG.value range(1,10)
+			
+			
+2020-03-24 05:58:01.026 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "range") (символ 1)
+2020-03-24 05:58:01.026 GMT [16168] ОПЕРАТОР:  range
+2020-03-24 05:58:01.427 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "range") (символ 1)
+2020-03-24 05:58:01.427 GMT [16168] ОПЕРАТОР:  range
+2020-03-24 05:58:01.776 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "range") (символ 1)
+2020-03-24 05:58:01.776 GMT [16168] ОПЕРАТОР:  range
+2020-03-24 05:58:07.456 GMT [16168] ОШИБКА:  оператор не существует: character varying = integer (символ 155)
+2020-03-24 05:58:07.456 GMT [16168] ПОДСКАЗКА:  Оператор с данными именем и типами аргументов не найден. Возможно, вам следует добавить явные приведения типов.
+2020-03-24 05:58:07.456 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.interpretation_groups IG
+		on IGT.interpretation_group_id = IG.id
+	WHERE IG.value = 3
+			
+			
+2020-03-24 05:58:08.053 GMT [16168] ОШИБКА:  оператор не существует: character varying = integer (символ 155)
+2020-03-24 05:58:08.053 GMT [16168] ПОДСКАЗКА:  Оператор с данными именем и типами аргументов не найден. Возможно, вам следует добавить явные приведения типов.
+2020-03-24 05:58:08.053 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.interpretation_groups IG
+		on IGT.interpretation_group_id = IG.id
+	WHERE IG.value = 3
+			
+			
+2020-03-24 05:59:47.024 GMT [16168] ОШИБКА:  таблица "ig" отсутствует в предложении FROM (символ 190)
+2020-03-24 05:59:47.024 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE IG.value = '0'
+			
+			
+2020-03-24 06:00:22.398 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "range") (символ 202)
+2020-03-24 06:00:22.398 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE IG.value in range(0,3)
+			
+			
+2020-03-24 06:00:45.016 GMT [16168] ОШИБКА:  таблица "ig" отсутствует в предложении FROM (символ 190)
+2020-03-24 06:00:45.016 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE IG.value >= IGT.min_interpretation_group_value
+			
+			
+2020-03-24 06:00:45.461 GMT [16168] ОШИБКА:  таблица "ig" отсутствует в предложении FROM (символ 190)
+2020-03-24 06:00:45.461 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE IG.value >= IGT.min_interpretation_group_value
+			
+			
+2020-03-24 06:00:45.706 GMT [16168] ОШИБКА:  таблица "ig" отсутствует в предложении FROM (символ 190)
+2020-03-24 06:00:45.706 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE IG.value >= IGT.min_interpretation_group_value
+			
+			
+2020-03-24 06:00:45.919 GMT [16168] ОШИБКА:  таблица "ig" отсутствует в предложении FROM (символ 190)
+2020-03-24 06:00:45.919 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE IG.value >= IGT.min_interpretation_group_value
+			
+			
+2020-03-24 06:00:46.157 GMT [16168] ОШИБКА:  таблица "ig" отсутствует в предложении FROM (символ 190)
+2020-03-24 06:00:46.157 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE IG.value >= IGT.min_interpretation_group_value
+			
+			
+2020-03-24 06:00:46.433 GMT [16168] ОШИБКА:  таблица "ig" отсутствует в предложении FROM (символ 190)
+2020-03-24 06:00:46.433 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE IG.value >= IGT.min_interpretation_group_value
+			
+			
+2020-03-24 06:01:32.620 GMT [16168] ОШИБКА:  таблица "igrv" отсутствует в предложении FROM (символ 247)
+2020-03-24 06:01:32.620 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		IGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:07:59.386 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "left") (символ 1)
+2020-03-24 06:07:59.386 GMT [16168] ОПЕРАТОР:  left
+2020-03-24 06:08:02.428 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "WHERE") (символ 1)
+2020-03-24 06:08:02.428 GMT [16168] ОПЕРАТОР:  WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+2020-03-24 06:11:53.043 GMT [7064] ОШИБКА:  повторяющееся значение ключа нарушает ограничение уникальности "interpretation_group_thinks_pkey"
+2020-03-24 06:11:53.043 GMT [7064] ПОДРОБНОСТИ:  Ключ "(id)=(3)" уже существует.
+2020-03-24 06:11:53.043 GMT [7064] ОПЕРАТОР:  INSERT INTO public.interpretation_group_thinks (interpretation_group_id,min_interpretation_group_value,max_interpretation_group_value,value)
+		VALUES ($1,$2,$3,$4)
+	RETURNING *
+2020-03-24 06:16:50.415 GMT [16168] ОШИБКА:  отношение "public.user_interpretation_group_results_view" не существует (символ 68)
+2020-03-24 06:16:50.415 GMT [16168] ОПЕРАТОР:  SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_results_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:17:44.647 GMT [6868] ОШИБКА:  столбец "interpretation_group_id" указан неоднократно
+2020-03-24 06:17:44.647 GMT [6868] ОПЕРАТОР:  CREATE OR REPLACE VIEW public.user_interpretation_groups_results
+	 AS
+	SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			;
+	
+	ALTER TABLE public.user_interpretation_groups_results
+	    OWNER TO postgres;
+2020-03-24 06:17:47.358 GMT [6868] ОШИБКА:  столбец "interpretation_group_id" указан неоднократно
+2020-03-24 06:17:47.358 GMT [6868] ОПЕРАТОР:  CREATE OR REPLACE VIEW public.user_interpretation_groups_results
+	 AS
+	SELECT 
+		*
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			;
+	
+	ALTER TABLE public.user_interpretation_groups_results
+	    OWNER TO postgres;
+2020-03-24 06:19:50.414 GMT [16168] ОШИБКА:  таблица "uigrb" отсутствует в предложении FROM (символ 45)
+2020-03-24 06:19:50.414 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRB.test_id,
+		UIGRV.test,
+		UIGRV.IGT.interpretation_group_id
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:19:51.102 GMT [16168] ОШИБКА:  таблица "uigrb" отсутствует в предложении FROM (символ 45)
+2020-03-24 06:19:51.102 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRB.test_id,
+		UIGRV.test,
+		UIGRV.IGT.interpretation_group_id
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:19:55.998 GMT [16168] ОШИБКА:  в элементе предложения FROM неверная ссылка на таблицу "igt" (символ 74)
+2020-03-24 06:19:55.998 GMT [16168] ПОДСКАЗКА:  Таблица "igt" присутствует в запросе, но сослаться на неё из этой части запроса нельзя.
+2020-03-24 06:19:55.998 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.IGT.interpretation_group_id
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:19:56.794 GMT [16168] ОШИБКА:  в элементе предложения FROM неверная ссылка на таблицу "igt" (символ 74)
+2020-03-24 06:19:56.794 GMT [16168] ПОДСКАЗКА:  Таблица "igt" присутствует в запросе, но сослаться на неё из этой части запроса нельзя.
+2020-03-24 06:19:56.794 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.IGT.interpretation_group_id
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:20:21.266 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: ".") (символ 139)
+2020-03-24 06:20:21.266 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.interpretation_group_id,
+		UIGRV.interpretation_group
+		UIGRV.values
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:20:23.627 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: ".") (символ 139)
+2020-03-24 06:20:23.627 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.interpretation_group_id,
+		UIGRV.interpretation_group
+		UIGRV.value
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:20:48.593 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: ".") (символ 151)
+2020-03-24 06:20:48.593 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.interpretation_group_id,
+		UIGRV.interpretation_group,
+		UIGRV.value
+		IGT.value think
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:20:49.357 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: ".") (символ 151)
+2020-03-24 06:20:49.357 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.interpretation_group_id,
+		UIGRV.interpretation_group,
+		UIGRV.value
+		IGT.value think
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:21:24.362 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "UIGRV") (символ 166)
+2020-03-24 06:21:24.362 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.interpretation_group_id,
+		UIGRV.interpretation_group,
+		UIGRV.value,
+		IGT.value think
+		UIGRV.date
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:21:25.107 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "UIGRV") (символ 166)
+2020-03-24 06:21:25.107 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.interpretation_group_id,
+		UIGRV.interpretation_group,
+		UIGRV.value,
+		IGT.value think
+		UIGRV.date
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:22:29.375 GMT [16168] ОШИБКА:  ошибка синтаксиса (примерное положение: "IGT") (символ 179)
+2020-03-24 06:22:29.375 GMT [16168] ОПЕРАТОР:  SELECT 
+		UIGRV.date,
+		UIGRV.user_id,
+		UIGRV.user_login,
+		UIGRV.test_id,
+		UIGRV.test,
+		UIGRV.interpretation_group_id,
+		UIGRV.interpretation_group,
+		UIGRV.value,
+		IGT.id think_id
+		IGT.value think
+	FROM 
+		public.interpretation_group_thinks IGT left join public.user_interpretation_group_values_view UIGRV
+		on IGT.interpretation_group_id = UIGRV.interpretation_group_id
+	WHERE 
+		UIGRV.value >= IGT.min_interpretation_group_value and
+		UIGRV.value <= IGT.max_interpretation_group_value
+			
+			
+			
+2020-03-24 06:35:47.770 GMT [10012] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 06:40:47.716 GMT [1868] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 06:56:50.265 GMT [2448] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 07:16:40.625 GMT [13240] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:34:29.817 GMT [1796] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:39:40.703 GMT [6800] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:44:29.656 GMT [13308] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:48:55.490 GMT [9740] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:48:55.491 GMT [9740] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:49:40.106 GMT [12600] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:49:40.106 GMT [12600] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:51:42.708 GMT [7408] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:51:42.709 GMT [7408] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:52:12.863 GMT [9900] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:52:12.863 GMT [15944] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:52:12.863 GMT [9900] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:52:12.863 GMT [15944] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:55:16.178 GMT [12212] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:55:16.178 GMT [6220] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:55:16.178 GMT [12212] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:55:16.178 GMT [6220] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:55:38.137 GMT [5792] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:55:38.138 GMT [5792] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:55:49.150 GMT [12220] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:55:49.150 GMT [12220] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:56:33.949 GMT [9584] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:56:33.949 GMT [9584] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:57:00.049 GMT [8180] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:57:00.049 GMT [8180] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 09:57:32.194 GMT [1796] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 09:58:19.198 GMT [9400] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:00:32.258 GMT [1712] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:01:53.261 GMT [6456] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:19:38.172 GMT [12952] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 10:19:38.172 GMT [12952] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 10:19:38.172 GMT [12952] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 10:20:11.769 GMT [15024] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 10:20:11.769 GMT [15024] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 10:20:11.769 GMT [15024] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 10:25:20.113 GMT [5604] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 10:25:20.113 GMT [5604] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 10:25:20.113 GMT [5604] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 10:25:38.012 GMT [15024] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 10:25:38.012 GMT [15024] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 10:25:38.012 GMT [15024] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 10:27:36.141 GMT [12952] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:27:36.141 GMT [15024] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:27:36.141 GMT [5604] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:27:36.143 GMT [11780] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:28:43.262 GMT [13660] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 10:28:43.262 GMT [13660] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 10:28:43.262 GMT [13660] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 10:30:28.128 GMT [13660] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:30:28.131 GMT [5388] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:31:46.859 GMT [14548] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:33:24.614 GMT [9584] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:33:24.614 GMT [12416] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:35:02.702 GMT [14048] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 10:35:02.702 GMT [14048] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 10:35:02.702 GMT [14048] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 10:35:16.511 GMT [14048] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:35:16.513 GMT [9448] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:35:20.179 GMT [14632] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 10:35:20.179 GMT [14632] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 10:35:20.179 GMT [14632] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 10:35:26.996 GMT [14632] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:35:26.999 GMT [11488] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:35:50.610 GMT [4032] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:35:50.610 GMT [8752] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:41:14.542 GMT [12132] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 10:41:14.542 GMT [12132] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 10:41:14.542 GMT [12132] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 10:43:46.876 GMT [12132] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:43:46.880 GMT [8812] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:43:46.880 GMT [13552] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:48:02.616 GMT [13040] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:48:05.550 GMT [1152] ОШИБКА:  столбец "user_interpretation_group_results_view.interpretation_group" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 8)
+2020-03-24 10:48:05.550 GMT [1152] ОПЕРАТОР:  SELECT public.user_interpretation_group_results_view.interpretation_group AS public_user_interpretation_group_results_view_interpretat_1, public.user_interpretation_group_results_view.think AS public_user_interpretation_group_results_view_think, public.user_interpretation_group_results_view.value AS public_user_interpretation_group_results_view_value, public.user_interpretation_group_results_view.test_id AS public_user_interpretation_group_results_view_test_id, public.user_interpretation_group_results_view.user_id AS public_user_interpretation_group_results_view_user_id, max(public.user_interpretation_group_results_view.date) AS max_1 
+	FROM public.user_interpretation_group_results_view 
+	WHERE public.user_interpretation_group_results_view.test_id = 6 AND public.user_interpretation_group_results_view.user_id = 2
+2020-03-24 10:48:49.863 GMT [1152] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:48:53.596 GMT [13612] ОШИБКА:  столбец "user_interpretation_group_results_view.interpretation_group" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 8)
+2020-03-24 10:48:53.596 GMT [13612] ОПЕРАТОР:  SELECT public.user_interpretation_group_results_view.interpretation_group AS public_user_interpretation_group_results_view_interpretat_1, public.user_interpretation_group_results_view.think AS public_user_interpretation_group_results_view_think, public.user_interpretation_group_results_view.value AS public_user_interpretation_group_results_view_value, public.user_interpretation_group_results_view.test_id AS public_user_interpretation_group_results_view_test_id, public.user_interpretation_group_results_view.user_id AS public_user_interpretation_group_results_view_user_id, max(public.user_interpretation_group_results_view.date) AS max_1 
+	FROM public.user_interpretation_group_results_view 
+	WHERE public.user_interpretation_group_results_view.test_id = 6 AND public.user_interpretation_group_results_view.user_id = 2
+2020-03-24 10:49:58.324 GMT [13612] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:50:00.449 GMT [16268] ОШИБКА:  столбец "user_interpretation_group_results_view.value" должен фигурировать в предложении GROUP BY или использоваться в агрегатной функции (символ 247)
+2020-03-24 10:50:00.449 GMT [16268] ОПЕРАТОР:  SELECT public.user_interpretation_group_results_view.interpretation_group AS public_user_interpretation_group_results_view_interpretat_1, public.user_interpretation_group_results_view.think AS public_user_interpretation_group_results_view_think, public.user_interpretation_group_results_view.value AS public_user_interpretation_group_results_view_value, public.user_interpretation_group_results_view.test_id AS public_user_interpretation_group_results_view_test_id, public.user_interpretation_group_results_view.user_id AS public_user_interpretation_group_results_view_user_id, max(public.user_interpretation_group_results_view.date) AS max_1 
+	FROM public.user_interpretation_group_results_view 
+	WHERE public.user_interpretation_group_results_view.test_id = 6 AND public.user_interpretation_group_results_view.user_id = 2 GROUP BY public.user_interpretation_group_results_view.interpretation_group, public.user_interpretation_group_results_view.think, public.user_interpretation_group_results_view.test_id, public.user_interpretation_group_results_view.user_id
+2020-03-24 10:50:39.371 GMT [16268] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:51:23.116 GMT [14068] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 10:55:30.401 GMT [7064] ОШИБКА:  ошибка синтаксиса (примерное положение: "2020") (символ 86)
+2020-03-24 10:55:30.401 GMT [7064] ОПЕРАТОР:  SELECT x.* FROM public.user_interpretation_group_results_view x
+	WHERE x."date" IN (''2020-03-24 10:24:55.401'',''2020-03-24 10:25:44.107'',''2020-03-24 10:27:02.588'',''2020-03-24 10:27:46.684'',''2020-03-24 10:29:08.403'',''2020-03-24 10:30:14.473'',''2020-03-24 10:30:31.813'',''2020-03-24 10:32:40.160'',''2020-03-24 10:32:52.453'',''2020-03-24 10:33:16.714'',''2020-03-24 10:33:27.996'',''2020-03-24 10:34:06.472'',''2020-03-24 10:34:28.221'',''2020-03-24 10:35:34.650'',''2020-03-24 10:36:06.542'',''2020-03-24 10:37:34.899'',''2020-03-24 10:38:50.127'',''2020-03-24 10:39:34.161'',''2020-03-24 10:41:33.826'',''2020-03-24 10:42:23.833'')
+2020-03-24 11:07:18.395 GMT [7212] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:07:18.395 GMT [8920] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:07:24.843 GMT [11044] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:07:24.843 GMT [11508] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:07:24.843 GMT [11044] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 11:07:24.843 GMT [11508] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 11:07:41.582 GMT [13200] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:07:41.582 GMT [13200] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 11:07:54.008 GMT [7124] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:07:54.009 GMT [7124] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 11:08:28.414 GMT [1288] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:09:15.570 GMT [5164] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:09:30.313 GMT [6396] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:09:37.762 GMT [6460] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:09:37.762 GMT [6460] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 11:09:37.762 GMT [11676] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:09:37.762 GMT [11676] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-24 11:10:25.334 GMT [16076] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:10:33.570 GMT [13620] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:14:45.223 GMT [13160] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 11:14:45.223 GMT [13160] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 11:14:45.223 GMT [13160] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 11:14:46.850 GMT [15080] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 11:14:46.850 GMT [15080] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 11:14:46.850 GMT [15080] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 11:14:58.726 GMT [13160] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:14:58.726 GMT [15080] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:14:58.728 GMT [12204] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:15:45.964 GMT [15976] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 11:15:45.964 GMT [15976] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 11:15:45.964 GMT [15976] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 11:26:49.399 GMT [13924] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-24 11:26:49.399 GMT [13924] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-24 11:26:49.399 GMT [13924] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-24 11:40:07.487 GMT [13924] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:40:07.487 GMT [15976] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:40:07.490 GMT [16780] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:40:07.490 GMT [3932] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-24 11:45:42.829 GMT [13160] ОШИБКА:  ошибка синтаксиса (примерное положение: "public") (символ 1)
+2020-03-24 11:45:42.829 GMT [13160] ОПЕРАТОР:  public.create_props_view_for_entity('interpretation_group_think', 4)
+2020-03-24 11:45:52.217 GMT [13160] ОШИБКА:  процедура create_props_view_for_entity(unknown, integer) не существует (символ 6)
+2020-03-24 11:45:52.217 GMT [13160] ПОДСКАЗКА:  Процедура с данными именем и типами аргументов не найдена. Возможно, вам следует добавить явные приведения типов.
+2020-03-24 11:45:52.217 GMT [13160] ОПЕРАТОР:  CALL create_props_view_for_entity('interpretation_group_think', 4)
+2020-03-24 12:02:53.757 GMT [13988] ОШИБКА:  отношение "tbl" не существует (символ 79)
+2020-03-24 12:02:53.757 GMT [13988] ОПЕРАТОР:  CREATE PROCEDURE insert_data(answers bigint[])
+	LANGUAGE SQL
+	AS $$
+	INSERT INTO tbl VALUES (a);
+	INSERT INTO tbl VALUES (b);
+	$$;
+	
+	
+	CREATE TABLE table_a AS SELECT * FROM public.user_interpretation_group_values_view
+2020-03-24 12:04:31.274 GMT [10780] ���������:  ������� ������ �� ������� ����������
+2020-03-24 12:04:31.276 GMT [10780] ���������:  ���������� ���� �������� ����������
+2020-03-24 12:04:31.276 GMT [13988] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.277 GMT [13224] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.277 GMT [17172] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.277 GMT [13160] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.278 GMT [10880] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.278 GMT [7884] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.278 GMT [9508] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.280 GMT [9700] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.281 GMT [7232] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.282 GMT [12440] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.283 GMT [384] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.284 GMT [15176] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.285 GMT [11708] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.286 GMT [14596] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.288 GMT [14732] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.289 GMT [5688] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.290 GMT [6324] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.291 GMT [15512] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.293 GMT [7472] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.294 GMT [12100] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.295 GMT [7960] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.296 GMT [4584] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.298 GMT [14448] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.299 GMT [16168] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.300 GMT [13244] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.301 GMT [2472] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.302 GMT [8500] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.303 GMT [10432] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.305 GMT [15480] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.306 GMT [16176] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.307 GMT [13508] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.308 GMT [1056] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.309 GMT [15712] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.310 GMT [3732] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.312 GMT [8680] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.313 GMT [10968] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.314 GMT [3800] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.315 GMT [8160] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.316 GMT [9024] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.317 GMT [7440] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.318 GMT [3544] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.319 GMT [12412] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.320 GMT [11796] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.321 GMT [10828] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.323 GMT [8672] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.324 GMT [3456] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.325 GMT [16340] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.327 GMT [3132] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.328 GMT [11364] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.329 GMT [3116] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.330 GMT [8948] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.331 GMT [6604] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.332 GMT [11756] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.333 GMT [6868] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.333 GMT [13372] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-24 12:04:31.336 GMT [10780] ���������:  ������� ������� "logical replication launcher" (PID 11576) ���������� � ����� ������ 1
+2020-03-24 12:04:31.341 GMT [10900] ���������:  ����������
+2020-03-24 12:04:31.375 GMT [10780] ���������:  ������� �� ���������

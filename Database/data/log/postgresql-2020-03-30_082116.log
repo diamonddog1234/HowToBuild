@@ -1,0 +1,203 @@
+2020-03-30 08:21:16.910 GMT [1940] ���������:  ������� �� ���� ���������: 2020-03-27 10:09:35 GMT
+2020-03-30 08:21:16.924 GMT [1148] ���������:  ������� �� ������ ��������� �����������
+2020-03-30 09:26:31.640 GMT [13548] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:04:47.949 GMT [10800] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:24:18.055 GMT [13936] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:28:00.473 GMT [13604] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:29:35.685 GMT [564] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:29:35.686 GMT [564] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-30 11:29:40.181 GMT [5344] ОШИБКА:  отношение "public.categories_for_users" не существует (символ 13)
+2020-03-30 11:29:40.181 GMT [5344] ОПЕРАТОР:  INSERT INTO public.categories_for_users (user_id, category_id) VALUES (20, 3)
+2020-03-30 11:31:25.657 GMT [5344] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:31:27.873 GMT [1212] ОШИБКА:  отношение "public.categories_for_users" не существует (символ 13)
+2020-03-30 11:31:27.873 GMT [1212] ОПЕРАТОР:  INSERT INTO public.categories_for_users (user_id, category_id) VALUES (21, 4)
+2020-03-30 11:31:29.503 GMT [7852] ОШИБКА:  отношение "public.categories_for_users" не существует (символ 13)
+2020-03-30 11:31:29.503 GMT [7852] ОПЕРАТОР:  INSERT INTO public.categories_for_users (user_id, category_id) VALUES (22, 5)
+2020-03-30 11:31:30.801 GMT [8040] ОШИБКА:  отношение "public.categories_for_users" не существует (символ 13)
+2020-03-30 11:31:30.801 GMT [8040] ОПЕРАТОР:  INSERT INTO public.categories_for_users (user_id, category_id) VALUES (23, 6)
+2020-03-30 11:31:57.246 GMT [1212] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:31:57.247 GMT [8040] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:31:57.247 GMT [7852] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:31:59.242 GMT [2976] ОШИБКА:  отношение "public.categories_for_users" не существует (символ 13)
+2020-03-30 11:31:59.242 GMT [2976] ОПЕРАТОР:  INSERT INTO public.categories_for_users (user_id, category_id) VALUES (24, 7)
+2020-03-30 11:34:45.108 GMT [2976] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:34:57.688 GMT [2220] ОШИБКА:  отношение "public.categories_for_users" не существует (символ 13)
+2020-03-30 11:34:57.688 GMT [2220] ОПЕРАТОР:  INSERT INTO public.categories_for_users (user_id, category_id) VALUES (25, 7)
+2020-03-30 11:35:10.064 GMT [2220] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:35:20.261 GMT [5876] ОШИБКА:  отношение "public.categories_for_users" не существует (символ 13)
+2020-03-30 11:35:20.261 GMT [5876] ОПЕРАТОР:  INSERT INTO public.categories_for_users (user_id, category_id) VALUES (26, 7)
+2020-03-30 11:35:24.933 GMT [5876] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:35:53.725 GMT [7296] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:35:53.725 GMT [7296] СООБЩЕНИЕ:  неожиданный обрыв соединения с клиентом при открытой транзакции
+2020-03-30 11:35:55.169 GMT [3312] ОШИБКА:  отношение "public.categories_for_users" не существует (символ 13)
+2020-03-30 11:35:55.169 GMT [3312] ОПЕРАТОР:  INSERT INTO public.categories_for_users (user_id, category_id) VALUES (28, 7)
+2020-03-30 11:38:00.240 GMT [3312] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 11:39:48.878 GMT [13100] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:04:48.079 GMT [11528] ОШИБКА:  в целевой внешней таблице "test_results" нет ограничения уникальности, соответствующего данным ключам
+2020-03-30 12:04:48.079 GMT [11528] ОПЕРАТОР:  CREATE TABLE public.interpretation_group_test_result_data
+	(
+	    id bigserial,
+	    test_result_id bigint,
+	    interpretation_group_id bigint,
+	    think_id bigint,
+	    value real,
+	    FOREIGN KEY (test_result_id)
+	        REFERENCES public.test_results (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID,
+	    FOREIGN KEY (interpretation_group_id)
+	        REFERENCES public.interpretation_groups (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	)
+	
+	TABLESPACE pg_default;
+	
+	ALTER TABLE public.interpretation_group_test_result_data
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-03-30 12:04:53.575 GMT [11528] ОШИБКА:  в целевой внешней таблице "test_results" нет ограничения уникальности, соответствующего данным ключам
+2020-03-30 12:04:53.575 GMT [11528] ОПЕРАТОР:  CREATE TABLE public.interpretation_group_test_result_data
+	(
+	    id bigserial,
+	    test_result_id bigint,
+	    interpretation_group_id bigint,
+	    think_id bigint,
+	    value real,
+	    FOREIGN KEY (test_result_id)
+	        REFERENCES public.test_results (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID,
+	    FOREIGN KEY (interpretation_group_id)
+	        REFERENCES public.interpretation_groups (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	)
+	
+	TABLESPACE pg_default;
+	
+	ALTER TABLE public.interpretation_group_test_result_data
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-03-30 12:04:59.435 GMT [11528] ОШИБКА:  в целевой внешней таблице "test_results" нет ограничения уникальности, соответствующего данным ключам
+2020-03-30 12:04:59.435 GMT [11528] ОПЕРАТОР:  CREATE TABLE public.interpretation_group_test_result_data
+	(
+	    id bigserial,
+	    test_result_id bigint,
+	    interpretation_group_id bigint,
+	    think_id bigint,
+	    value real,
+	    PRIMARY KEY (id),
+	    FOREIGN KEY (test_result_id)
+	        REFERENCES public.test_results (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID,
+	    FOREIGN KEY (interpretation_group_id)
+	        REFERENCES public.interpretation_groups (id) MATCH SIMPLE
+	        ON UPDATE CASCADE
+	        ON DELETE CASCADE
+	        NOT VALID
+	)
+	
+	TABLESPACE pg_default;
+	
+	ALTER TABLE public.interpretation_group_test_result_data
+	    OWNER to postgres;
+	
+	
+	
+	
+	
+	
+2020-03-30 12:31:54.464 GMT [11548] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:31:54.464 GMT [11548] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-30 12:31:54.464 GMT [11548] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-30 12:31:55.362 GMT [6264] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:31:55.362 GMT [6264] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-30 12:31:55.362 GMT [6264] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-30 12:31:55.737 GMT [8168] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:31:55.737 GMT [8168] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-30 12:31:55.737 GMT [8168] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-30 12:31:55.899 GMT [12124] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:31:55.899 GMT [12124] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-30 12:31:55.899 GMT [12124] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-30 12:33:06.512 GMT [14952] ОШИБКА:  нулевое значение в столбце "answer_id" нарушает ограничение NOT NULL
+2020-03-30 12:33:06.512 GMT [14952] ПОДРОБНОСТИ:  Ошибочная строка содержит (1491, 2, null, 2020-03-30 12:33:06.509441).
+2020-03-30 12:33:06.512 GMT [14952] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, NULL) RETURNING public.user_answers.id
+2020-03-30 12:33:37.575 GMT [5368] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:33:37.575 GMT [5368] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-30 12:33:37.575 GMT [5368] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-30 12:33:40.223 GMT [4260] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:33:40.223 GMT [4260] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-30 12:33:40.223 GMT [4260] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-30 12:33:53.024 GMT [15092] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:33:53.024 GMT [15092] ПОДРОБНОСТИ:  Ключ (answer_id)=(0) отсутствует в таблице "answers".
+2020-03-30 12:33:53.024 GMT [15092] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2, 0) RETURNING public.user_answers.id
+2020-03-30 12:34:31.831 GMT [5460] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:34:31.831 GMT [5460] ПОДРОБНОСТИ:  Ключ (answer_id)=(-1) отсутствует в таблице "answers".
+2020-03-30 12:34:31.831 GMT [5460] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2,  -1) RETURNING public.user_answers.id
+2020-03-30 12:34:33.072 GMT [12180] ОШИБКА:  INSERT или UPDATE в таблице "user_answers" нарушает ограничение внешнего ключа "user_answers_answer_id_fkey"
+2020-03-30 12:34:33.072 GMT [12180] ПОДРОБНОСТИ:  Ключ (answer_id)=(-1) отсутствует в таблице "answers".
+2020-03-30 12:34:33.072 GMT [12180] ОПЕРАТОР:  INSERT INTO public.user_answers (user_id, answer_id) VALUES (2,  -1) RETURNING public.user_answers.id
+2020-03-30 12:38:34.793 GMT [11548] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.793 GMT [8168] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.793 GMT [14952] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.794 GMT [6264] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.794 GMT [15092] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.794 GMT [5460] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.794 GMT [12124] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.794 GMT [12180] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.794 GMT [4260] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.794 GMT [5368] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 12:38:34.796 GMT [8020] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-03-30 13:07:56.868 GMT [1148] ���������:  ������� ������ �� ������� ����������
+2020-03-30 13:07:56.870 GMT [1148] ���������:  ���������� ���� �������� ����������
+2020-03-30 13:07:56.871 GMT [6576] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-30 13:07:56.871 GMT [11528] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-30 13:07:56.874 GMT [7364] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-30 13:07:56.874 GMT [9540] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-30 13:07:56.875 GMT [6340] ВАЖНО:  закрытие подключения по команде администратора
+2020-03-30 13:07:56.875 GMT [1148] ���������:  ������� ������� "logical replication launcher" (PID 8328) ���������� � ����� ������ 1
+2020-03-30 13:07:56.881 GMT [1092] ���������:  ����������
+2020-03-30 13:07:56.898 GMT [1148] ���������:  ������� �� ���������
