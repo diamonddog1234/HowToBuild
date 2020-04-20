@@ -1,5 +1,5 @@
 # coding: utf-8
-from sqlalchemy import BigInteger, CHAR, Column, DateTime, Float, ForeignKey, String, Table, text
+from sqlalchemy import BigInteger, Column, DateTime, Float, ForeignKey, String, Table, text
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -39,7 +39,7 @@ class Street(Base):
     __table_args__ = {'schema': 'public'}
 
     id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".streets_id_seq'::regclass)"))
-    value = Column(CHAR(1), nullable=False)
+    value = Column(String, nullable=False)
 
 
 class User(Base):
