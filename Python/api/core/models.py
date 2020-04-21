@@ -140,11 +140,14 @@ class Tube(Base):
     house_id = Column(ForeignKey('public.houses.id', ondelete='CASCADE', onupdate='CASCADE'))
     value = Column(String)
     samples = relationship('TubeSample', backref='tube')
+
+
     def to_basic_dictionary(self):
         return {
             'id': self.id,
             'depth': self.depth,
             'value': self.value,
+            'houseId': self.house_id,
         }
 
     def to_advanced_dictionary(self):
@@ -152,6 +155,7 @@ class Tube(Base):
             'id': self.id,
             'depth': self.depth,
             'value': self.value,
+            'houseId': self.house_id,
             'samples': [sample.to_advanced_dictionary() for sample in self.samples]
         }
 
@@ -160,7 +164,7 @@ class TubeSample(Base):
     __tablename__ = 'tube_samples'
     __table_args__ = {'schema': 'public'}
 
-    _id = Column(' id', BigInteger, primary_key=True, server_default=text("nextval('\"public\".tube_samples_id_seq'::regclass)"))
+    id = Column('id', BigInteger, primary_key=True, server_default=text("nextval('\"public\".tube_samples_id_seq'::regclass)"))
     depth = Column(Float)
     value = Column(Float)
     tube_id = Column(ForeignKey('public.tubes.id', ondelete='CASCADE', onupdate='CASCADE'))
@@ -171,6 +175,6 @@ class TubeSample(Base):
         return {
             'id': self.id,
             'depth': self.depth,
-            'date': self.date,
+            'date': self.date.strftime('%d-%m-%Y'),
             'value': self.value,
         }

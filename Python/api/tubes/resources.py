@@ -2,7 +2,7 @@ from flask import request, jsonify
 from flask_restful import Resource
 
 from core import get_database_session
-from core.auth.jwt import check_role_validation
+from core.auth.jwt import check_role_validation, check_validation
 from core.models import Tube
 
 
@@ -27,7 +27,7 @@ class AddTube(Resource):
         if db_tube:
             return jsonify({'msg': 'NOT_ORIGINAL_TUBE'})
         else:
-            tube = Tube(value = value, depth = depth, house_id = house_id)
+            tube = Tube(value=value, depth=depth, house_id=house_id)
             try:
                 get_database_session().add(tube)
                 get_database_session().commit()
@@ -87,3 +87,19 @@ class DeleteTube(Resource):
         get_database_session().delete(db_tube)
         get_database_session().commit()
         return jsonify({'msg': 'OK'})
+
+
+class GetTubeList(Resource):
+    @check_validation
+    def post(self):
+        db_tubes = get_database_session().query(Tube).all()
+        return jsonify({'tubes': [tube.to_basic_dictionary() for tube in db_tubes]})
+
+
+class GetTube(Resource):
+    @check_validation
+    def post(self, tube_id):
+        db_tube = get_database_session().query(Tube).filter(Tube.id == tube_id).first()
+        if not db_tube:
+            return jsonify({'msg': 'NO_TUBE'})
+        return jsonify(db_tube.to_basic_dictionary())
