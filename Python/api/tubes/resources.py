@@ -52,11 +52,21 @@ class ChangeTube(Resource):
             return jsonify({'msg': 'NO_TUBE'})
 
         if 'value' in json_data:
-            db_tube.value = str(json_data['value'])
+            if json_data['value'] != db_tube.value:
+                db_tube_repeat = get_database_session().query(Tube). \
+                    filter(Tube.value == json_data['value']). \
+                    first()
+                if db_tube_repeat:
+                    return jsonify({'msg': 'NOT_ORIGINAL_TUBE'})
+                else:
+                    db_tube.value = str(json_data['value'])
         if 'depth' in json_data:
             db_tube.depth = float(json_data['depth'])
         if 'houseId' in json_data:
             db_tube.house_id = int(json_data['houseId'])
+
+
+
 
         get_database_session().commit()
         return jsonify({'msg': 'OK'})

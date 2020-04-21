@@ -16,6 +16,12 @@ class District(Base):
     id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".districts_id_seq'::regclass)"))
     value = Column(String, nullable=False)
 
+    def to_basic_dictionary(self):
+        return {
+            'id': self.id,
+            'value': self.value
+        }
+
 
 class Role(Base):
     __tablename__ = 'roles'
@@ -33,6 +39,12 @@ class Role(Base):
             result.append(get_database_session().query(Role).filter(Role.value == role).first())
         return result
 
+    def to_basic_dictionary(self):
+        return {
+            'id': self.id,
+            'value': self.value
+        }
+
 
 class Street(Base):
     __tablename__ = 'streets'
@@ -40,6 +52,12 @@ class Street(Base):
 
     id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".streets_id_seq'::regclass)"))
     value = Column(String, nullable=False)
+
+    def to_basic_dictionary(self):
+        return {
+            'id': self.id,
+            'value': self.value
+        }
 
 
 class User(Base):
@@ -81,6 +99,29 @@ class House(Base):
     district = relationship('District')
     street = relationship('Street')
 
+    tubes = relationship('Tube', backref='house')
+
+    def to_basic_dictionary(self):
+        return {
+            'id': self.id,
+            'street': self.street.value,
+            'district': self.district.value,
+            'min_laying_depth': self.min_laying_depth,
+            'max_laying_depth': self.max_laying_depth,
+            'number': self.number,
+        }
+
+    def to_advanced_dictionary(self):
+        return {
+            'id': self.id,
+            'street': self.street.value,
+            'district': self.district.value,
+            'min_laying_depth': self.min_laying_depth,
+            'max_laying_depth': self.max_laying_depth,
+            'number': self.number,
+            'tubes': [tube.to_advanced_dictionary() for tube in self.tubes]
+        }
+
 
 t_user_roles = Table(
     'user_roles', metadata,
@@ -98,7 +139,21 @@ class Tube(Base):
     depth = Column(Float)
     house_id = Column(ForeignKey('public.houses.id', ondelete='CASCADE', onupdate='CASCADE'))
     value = Column(String)
-    house = relationship('House')
+    samples = relationship('TubeSample', backref='tube')
+    def to_basic_dictionary(self):
+        return {
+            'id': self.id,
+            'depth': self.depth,
+            'value': self.value,
+        }
+
+    def to_advanced_dictionary(self):
+        return {
+            'id': self.id,
+            'depth': self.depth,
+            'value': self.value,
+            'samples': [sample.to_advanced_dictionary() for sample in self.samples]
+        }
 
 
 class TubeSample(Base):
@@ -111,4 +166,11 @@ class TubeSample(Base):
     tube_id = Column(ForeignKey('public.tubes.id', ondelete='CASCADE', onupdate='CASCADE'))
     date = Column(DateTime, nullable=False)
 
-    tube = relationship('Tube')
+
+    def to_basic_dictionary(self):
+        return {
+            'id': self.id,
+            'depth': self.depth,
+            'date': self.date,
+            'value': self.value,
+        }
