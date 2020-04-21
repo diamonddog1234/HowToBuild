@@ -15,17 +15,17 @@ class AddHouse(Resource):
             return jsonify({'msg': 'no_street'})
         if 'district' not in json_data:
             return jsonify({'msg': 'no_district'})
-        if 'min_laying_depth' not in json_data:
-            return jsonify({'msg': 'no_min_laying_depth'})
-        if 'max_laying_depth' not in json_data:
-            return jsonify({'msg': 'no_max_laying_depth'})
+        if 'minLayingDepth' not in json_data:
+            return jsonify({'msg': 'no_minLayingDepth'})
+        if 'maxLayingDepth' not in json_data:
+            return jsonify({'msg': 'maxLayingDepth'})
         if 'number' not in json_data:
             return jsonify({'msg': 'no_number'})
 
         street = json_data['street']
         district = json_data['district']
-        min_laying_depth = float(json_data['min_laying_depth'])
-        max_laying_depth = float(json_data['max_laying_depth'])
+        min_laying_depth = float(json_data['minLayingDepth'])
+        max_laying_depth = float(json_data['maxLayingDepth'])
         number = str(json_data['number'])
 
         db_street = get_database_session().query(Street).filter(Street.value == street).first()
@@ -61,14 +61,41 @@ class DeleteHouse(Resource):
     @check_role_validation(['ChangeRecord'])
     def post(self):
         json_data = request.get_json()
-        if 'house_id' not in json_data:
-            return jsonify({'msg': 'no_house_id'})
-        house_id = int(json_data['house_id'])
+        if 'houseId' not in json_data:
+            return jsonify({'msg': 'no_houseId'})
+        house_id = int(json_data['houseId'])
         db_house = get_database_session().query(House).\
             filter(House.id == house_id).\
             first()
         if not db_house:
             return jsonify({'msg': 'NO_HOUSE'})
         get_database_session().delete(db_house)
+        get_database_session().commit()
+        return jsonify({'msg': 'OK'})
+
+
+class ChangeHouse(Resource):
+    @check_role_validation(['ChangeRecord'])
+    def post(self):
+        json_data = request.get_json()
+        if 'houseId' not in json_data:
+            return jsonify({'msg': 'no_houseId'})
+        house_id = int(json_data['houseId'])
+        db_house = get_database_session().query(House).\
+            filter(House.id == house_id).\
+            first()
+        if not db_house:
+            return jsonify({'msg': 'NO_HOUSE'})
+
+        if 'street' in json_data:
+            db_house.street = json_data['street']
+        if 'district' in json_data:
+            db_house.district_id = json_data['district']
+        if 'minLayingDepth' in json_data:
+            db_house.min_laying_depth = json_data['minLayingDepth']
+        if 'maxLayingDepth' in json_data:
+            db_house.max_laying_depth = json_data['maxLayingDepth']
+        if 'number' in json_data:
+            db_house.number = json_data['number']
         get_database_session().commit()
         return jsonify({'msg': 'OK'})
