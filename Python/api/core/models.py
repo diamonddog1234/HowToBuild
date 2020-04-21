@@ -97,7 +97,7 @@ class Tube(Base):
     id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".tubes_id_seq'::regclass)"))
     depth = Column(Float)
     house_id = Column(ForeignKey('public.houses.id', ondelete='CASCADE', onupdate='CASCADE'))
-
+    value = Column(String)
     house = relationship('House')
 
 
