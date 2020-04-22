@@ -1,4 +1,4 @@
-//ХУЙ СОСЕМ ГУБОЙ ТРЯСЕМ
+//ХУЙ СОСЕМ ГУБОЙ ТРЯСЕМ //
 
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
