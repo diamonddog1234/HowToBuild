@@ -1,5 +1,3 @@
-//ХУЙ СОСЕМ ГУБОЙ ТРЯСЕМ //
-
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -83,6 +81,8 @@ export default function AuthWindow() {
     })
   }
 
+
+
   return (
     <Grid container component="main" className={classes.root} justify='center'>
       <CssBaseline />
@@ -120,11 +120,11 @@ export default function AuthWindow() {
               onChange={(event) => {setPassword(event.target.value)}}
             />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={validate}
             >
               Войти
             </Button>
