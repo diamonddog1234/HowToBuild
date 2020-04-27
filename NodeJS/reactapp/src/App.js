@@ -5,6 +5,7 @@ import AuthWindow from "./components/AuthWindow"
 import ViewTable from './components/ViewTable/ViewTable';
 import { Grid, Container, Typography, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { blue, red } from '@material-ui/core/colors';
+import { Kompot } from './components/ViewTable/Kompot'
 
 const theme = createMuiTheme({
   typography: {
@@ -34,8 +35,7 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <Container style={{maxWidth:'90%'}}>
-        <Typography>Даунская таблица</Typography>
-        <ViewTable/>
+        <Kompot/>
       </Container>
     </MuiThemeProvider>
   );

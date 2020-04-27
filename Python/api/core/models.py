@@ -101,13 +101,15 @@ class House(Base):
 
     tubes = relationship('Tube', backref='house')
 
+
+
     def to_basic_dictionary(self):
         return {
             'id': self.id,
             'street': self.street.value,
             'district': self.district.value,
-            'min_laying_depth': self.min_laying_depth,
-            'max_laying_depth': self.max_laying_depth,
+            'minLayingDepth': self.min_laying_depth,
+            'maxLayingDepth': self.max_laying_depth,
             'number': self.number,
         }
 
@@ -116,11 +118,34 @@ class House(Base):
             'id': self.id,
             'street': self.street.value,
             'district': self.district.value,
-            'min_laying_depth': self.min_laying_depth,
-            'max_laying_depth': self.max_laying_depth,
+            'minLayingDepth': self.min_laying_depth,
+            'maxLayingDepth': self.max_laying_depth,
             'number': self.number,
             'tubes': [tube.to_advanced_dictionary() for tube in self.tubes]
         }
+
+
+class HouseFilterView(Base):
+    __tablename__ = 'house_filter_view'
+    __table_args__ = {'schema': 'public'}
+
+    houseId = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".houses_id_seq'::regclass)"))
+    number = Column(String, nullable=False)
+    street = Column(ForeignKey('public.streets.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
+    district = Column(ForeignKey('public.districts.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
+    minLayingDepth = Column(Float)
+    maxLayingDepth = Column(Float)
+
+    def to_basic_dictionary(self):
+        return {
+            'id': self.houseId,
+            'street': self.street,
+            'district': self.district,
+            'minLayingDepth': self.minLayingDepth,
+            'maxLayingDepth': self.maxLayingDepth,
+            'number': self.number,
+        }
+
 
 
 t_user_roles = Table(
@@ -178,3 +203,4 @@ class TubeSample(Base):
             'date': self.date.strftime('%d-%m-%Y'),
             'value': self.value,
         }
+

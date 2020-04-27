@@ -15,6 +15,33 @@ class District(Base):
     value = Column(String, nullable=False)
 
 
+t_house_filter_view = Table(
+    'house_filter_view', metadata,
+    Column('houseid', BigInteger),
+    Column('district', String),
+    Column('street', String),
+    Column('number', String),
+    schema='public'
+)
+
+
+t_pivot_view = Table(
+    'pivot_view', metadata,
+    Column('house_id', BigInteger),
+    Column('district', String),
+    Column('street', String),
+    Column('number', String),
+    Column('sample_id', BigInteger),
+    Column('date', DateTime),
+    Column('tube_id', BigInteger),
+    Column('tube', String),
+    Column('id', BigInteger),
+    Column('depth', Float),
+    Column('value', Float),
+    schema='public'
+)
+
+
 class Role(Base):
     __tablename__ = 'roles'
     __table_args__ = {'schema': 'public'}
@@ -82,7 +109,7 @@ class TubeSample(Base):
     __tablename__ = 'tube_samples'
     __table_args__ = {'schema': 'public'}
 
-    _id = Column(' id', BigInteger, primary_key=True, server_default=text("nextval('\"public\".tube_samples_id_seq'::regclass)"))
+    id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".tube_samples_id_seq'::regclass)"))
     depth = Column(Float)
     value = Column(Float)
     tube_id = Column(ForeignKey('public.tubes.id', ondelete='CASCADE', onupdate='CASCADE'))

@@ -38,7 +38,7 @@ class UserLogin(Resource):
                 is_password_ok = check_password_hash(user.password_hash, password)
             if is_password_ok:
                 access_token = create_access_token(user.create_access_token_payload(), expires_delta=False)
-                return jsonify({"msg": "OK", "access_token": access_token, "roles":  Role.get_roles_from_string_array(user.roles)})
+                return jsonify({"msg": "OK", "access_token": access_token, "roles":  user.role_string_array})
             else:
                 return jsonify({"msg": "WRONG_PASSWORD"})
         else:
@@ -79,7 +79,7 @@ class UserRegister(Resource):
             get_database().session.commit()
 
         return jsonify({"msg": "OK", "access_token": create_access_token(user.create_access_token_payload(), expires_delta=False),
-                        "roles":  Role.get_roles_from_string_array(roles) })
+                        "roles":  user.role_string_array })
 
 
 class UserDelete(Resource):
