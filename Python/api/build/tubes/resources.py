@@ -64,10 +64,6 @@ class ChangeTube(Resource):
             db_tube.depth = float(json_data['depth'])
         if 'houseId' in json_data:
             db_tube.house_id = int(json_data['houseId'])
-
-
-
-
         get_database_session().commit()
         return jsonify({'msg': 'OK'})
 

@@ -129,7 +129,7 @@ class HouseFilterView(Base):
     __tablename__ = 'house_filter_view'
     __table_args__ = {'schema': 'public'}
 
-    houseId = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".houses_id_seq'::regclass)"))
+    id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".houses_id_seq'::regclass)"))
     number = Column(String, nullable=False)
     street = Column(ForeignKey('public.streets.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
     district = Column(ForeignKey('public.districts.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
@@ -138,7 +138,7 @@ class HouseFilterView(Base):
 
     def to_basic_dictionary(self):
         return {
-            'id': self.houseId,
+            'id': self.id,
             'street': self.street,
             'district': self.district,
             'minLayingDepth': self.minLayingDepth,

@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from flask_restful import Resource
 
+from build.utils.filter import filter_entity
 from core import get_database_session
 from core.models import House, Street, District, HouseFilterView
 
@@ -61,9 +62,9 @@ class DeleteHouse(Resource):
     @check_role_validation(['ChangeRecord'])
     def post(self):
         json_data = request.get_json()
-        if 'houseId' not in json_data:
-            return jsonify({'msg': 'no_houseId'})
-        house_id = int(json_data['houseId'])
+        if 'id' not in json_data:
+            return jsonify({'msg': 'no_id'})
+        house_id = int(json_data['id'])
         db_house = get_database_session().query(House).\
             filter(House.id == house_id).\
             first()
@@ -134,25 +135,13 @@ class ChangeHouse(Resource):
 class GetHouseList(Resource):
     @check_validation
     def post(self):
-        db_houses = get_database_session().query(HouseFilterView)
-
-        if request.headers.get('content-type') == 'application/json':
-            json_data = request.get_json()
-            if 'filter' in json_data:
-                for filterKey, filterArray in json_data['filter'].items():
-                    for filter in filterArray:
-                        if filter['type'] == 'like':
-                            if hasattr(HouseFilterView, filterKey):
-                                db_houses = db_houses.filter(getattr(HouseFilterView, filterKey).like('%'+str(filter['value'])+'%'))
-
-        db_houses = db_houses.all()
-
-        return jsonify({'houses': [house.to_basic_dictionary() for house in db_houses]})
+        data = filter_entity(entity_class=HouseFilterView)
+        return data
 
 
 class GetHouse(Resource):
     @check_validation
-    def post(self,house_id):
+    def post(self, house_id):
         json_data = request.get_json()
         db_house = get_database_session().query(House).filter(House.id == house_id).first()
         if not db_house:
