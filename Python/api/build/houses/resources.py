@@ -103,7 +103,7 @@ class ChangeHouse(Resource):
             new_district = get_database_session().query(District).\
                 filter(District.value == json_data['district']).first()
             if not new_district:
-                new_district = Street(value=json_data['district'])
+                new_district = District(value=json_data['district'])
                 get_database_session().add(new_district)
                 get_database_session().flush()
         if 'minLayingDepth' in json_data:
@@ -146,4 +146,42 @@ class GetHouse(Resource):
         db_house = get_database_session().query(House).filter(House.id == house_id).first()
         if not db_house:
             return jsonify({'msg': 'NO_HOUSE'})
+        return jsonify(db_house.to_basic_dictionary())
+
+
+class GetPivotTable(Resource):
+    @check_validation
+    def post(self, house_id):
+        json_data = request.get_json()
+        db_house = get_database_session().query(House).filter(House.id == house_id).first()
+        if not db_house:
+            return jsonify({'msg': 'NO_HOUSE'})
+
+        tubes = db_house.tubes
+        min = 0
+        max = 1
+        result = {}
+        result['entities'] = []
+
+        for tube in tubes:
+            samples = tube.samples
+            for sample in samples:
+                if sample.depth > max:
+                    max = sample.depth
+                elif sample.depth < min:
+                    min = sample.depth
+
+        for tube in tubes:
+            sample_dict = {}
+            samples = tube.samples
+            for sample in samples:
+                sample_dict['tubeId'] = tube.id
+                sample_dict['tube'] = tube.value
+                sample_dict['date'] = sample.date
+                for depth in range(min, max):
+                    if sample.depth == depth:
+                        sample_dict['depth'+depth] = sample.value
+                    else:
+                        sample_dict['depth'+depth] = 0
+            result['entities'] = []
         return jsonify(db_house.to_basic_dictionary())

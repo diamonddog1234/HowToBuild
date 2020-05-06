@@ -1,84 +1,98 @@
-from operator import or_
+from sqlalchemy import or_, and_
 
 from flask import request
 
 from core import get_database_session
 
 
-def filter_like_query(filter_data):
+'''def filter_like_query(filter_data):
     if filter_data['value'] == '':
         return  filter_data['query']
     return filter_data['query'].\
         filter(getattr(filter_data['entity_class'], filter_data['key']).\
+               like('%' + str(filter_data['value']) + '%'))'''
+
+def filter_like_query(filter_data):
+    return (getattr(filter_data['entity_class'], filter_data['key']).\
                like('%' + str(filter_data['value']) + '%'))
+
+def filter_equal_text(filter_data):
+    return (getattr(filter_data['entity_class'], filter_data['key']) == filter_data['value'])
+
+
+'''def filter_equal_text(filter_data):
+    if filter_data['value'] == '':
+        return filter_data['query']
+    return filter_data['query'].\
+        filter(getattr(filter_data['entity_class'], filter_data['key']) == filter_data['value'])'''
+
+
 
 
 def filter_equal(filter_data):
-    if filter_data['value'] == '':
-        return  filter_data['query']
-    return filter_data['query'].\
-        filter(getattr(filter_data['entity_class'], filter_data['key']) == filter_data['value'])
+    try:
+        return getattr(filter_data['entity_class'], filter_data['key']) == float(filter_data['value'])
+    except ValueError:
+        return -1
 
 
 def filter_more(filter_data):
-    if filter_data['value'] == '':
-        return  filter_data['query']
-    return filter_data['query'].\
-        filter(getattr(filter_data['entity_class'], filter_data['key']) > filter_data['value'])
+    try:
+        return getattr(filter_data['entity_class'], filter_data['key']) > float(filter_data['value'])
+    except ValueError:
+        return  -1
 
 def filter_less(filter_data):
-    if filter_data['value'] == '':
-        return  filter_data['query']
-    return filter_data['query'].\
-        filter(getattr(filter_data['entity_class'], filter_data['key']) < filter_data['value'])
+    try:
+        return getattr(filter_data['entity_class'], filter_data['key']) < float(filter_data['value'])
+    except ValueError:
+        return -1
 
-def filter_more_qual(filter_data):
-    if filter_data['value'] == '':
-        return  filter_data['query']
-    return filter_data['query'].\
-        filter(getattr(filter_data['entity_class'], filter_data['key']) >= filter_data['value'])
+def filter_more_equal(filter_data):
+    try:
+        return getattr(filter_data['entity_class'], filter_data['key']) >= float(filter_data['value'])
+    except ValueError:
+        return -1
 
 def filter_less_equal(filter_data):
-    if filter_data['value'] == '':
-        return  filter_data['query']
-    return filter_data['query'].\
-        filter(getattr(filter_data['entity_class'], filter_data['key']) <= filter_data['value'])
+    try:
+        return getattr(filter_data['entity_class'], filter_data['key']) <= float(filter_data['value'])
+    except ValueError:
+        return -1
 
 def filter_in_range(filter_data):
-    if filter_data['value'] == '':
-        return  filter_data['query']
     split = filter_data['value'].split(';')
-    a = float(split[0][1:])
-    b = float(split[1][:-1])
-    if b < a:
-        a, b = b, a
-    return filter_data['query'].\
-        filter(getattr(filter_data['entity_class'], filter_data['key']) <= b).\
-        filter(getattr(filter_data['entity_class'], filter_data['key']) >= a)
+    try:
+        a = float(split[0][1:])
+        b = float(split[1][:-1])
+        if b < a:
+            a, b = b, a
+        return and_(getattr(filter_data['entity_class'], filter_data['key']) <= b,
+                    getattr(filter_data['entity_class'], filter_data['key']) >= a)
+    except ValueError:
+        -1
 
 def filter_out_range(filter_data):
-    if filter_data['value'] == '':
-        return  filter_data['query']
     split = filter_data['value'].split(';')
     a = float(split[0][1:])
     b = float(split[1][:-1])
-
-    if b < a:
-        a, b = b, a
-
-    print(a)
-    return filter_data['query'].\
-        filter(or_(getattr(filter_data['entity_class'], filter_data['key']) < a,
-                   getattr(filter_data['entity_class'], filter_data['key']) > b))
+    try:
+        if b < a:
+            a, b = b, a
+        return or_(getattr(filter_data['entity_class'], filter_data['key']) > b,
+                    getattr(filter_data['entity_class'], filter_data['key']) < a)
+    except ValueError:
+        -1
 
 
 filter_type_funcs = {
     'like': filter_like_query,
+    'equalText': filter_equal_text,
     'equal': filter_equal,
     'more': filter_more,
     'less': filter_less,
     'lessEqual': filter_less_equal,
-    'moreEqual': filter_less_equal,
+    'moreEqual': filter_more_equal,
     'inRange': filter_in_range,
     'outRange': filter_out_range,
 }
@@ -92,17 +106,22 @@ def filter_entity(entity_class):
             filter = json_data['filter']
             if filter:
                 for filter_key, filter_array in filter.items():
+                    conditions = []
                     for filter in filter_array:
                         if hasattr(entity_class, filter_key):
-                            filter_data = {
-                               'entity_class': entity_class,
-                               'query': query,
-                               'key': filter_key,
-                               'value': filter['value']
-                            }
+                            if filter['value'] != '':
+                                filter_data = {
+                                   'entity_class': entity_class,
+                                   'query': query,
+                                   'key': filter_key,
+                                   'value': filter['value']
+                                }
 
-                            if filter['type'] in filter_type_funcs:
-                                query = (filter_type_funcs[filter['type']](filter_data=filter_data))
+                                if filter['type'] in filter_type_funcs:
+                                    condition = (filter_type_funcs[filter['type']](filter_data=filter_data))
+                                    if condition != -1:
+                                        conditions.append(condition)
+                    query = query.filter(or_(*conditions))
     all = query.all()
     count = len(all)
     if 'pagination' in json_data:

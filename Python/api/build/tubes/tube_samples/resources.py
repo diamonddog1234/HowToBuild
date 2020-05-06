@@ -1,9 +1,13 @@
+from datetime import datetime
+
 from flask import request, jsonify
 from flask_restful import Resource
 
 from core import get_database_session
 from core.auth.jwt import check_role_validation, check_validation
-from core.models import TubeSample
+from core.models import TubeSample, TubeSampleFilterView
+
+from api.build.utils.filter import filter_entity
 
 
 class AddSample(Resource):
@@ -43,9 +47,9 @@ class DeleteSample(Resource):
     @check_role_validation(['ChangeRecord'])
     def post(self):
         json_data = request.get_json()
-        if 'sampleId' not in json_data:
+        if 'id' not in json_data:
             return jsonify({'msg': 'no_sampleId'})
-        sample_id = int(json_data['sampleId'])
+        sample_id = int(json_data['id'])
         db_sample = get_database_session().query(TubeSample).\
             filter(TubeSample.id == sample_id).\
             first()
@@ -60,9 +64,9 @@ class ChangeSample(Resource):
     @check_role_validation(['ChangeRecord'])
     def post(self):
         json_data = request.get_json()
-        if 'sampleId' not in json_data:
+        if 'id' not in json_data:
             return jsonify({'msg': 'no_sampleId'})
-        sample_id = int(json_data['sampleId'])
+        sample_id = int(json_data['id'])
         db_sample = get_database_session().query(TubeSample).\
             filter(TubeSample.id == sample_id).\
             first()
@@ -81,6 +85,7 @@ class ChangeSample(Resource):
             new_tube_id = int(json_data['tubeId'])
         if 'date' in json_data:
             new_date = json_data['date']
+
 
         db_sample_repeat = get_database_session().query(TubeSample).\
             filter(TubeSample.date == new_date).\
@@ -103,8 +108,8 @@ class ChangeSample(Resource):
 class GetSampleList(Resource):
     @check_validation
     def post(self):
-        db_samples = get_database_session().query(TubeSample).all()
-        return jsonify({'samples': [sample.to_basic_dictionary() for sample in db_samples]})
+        data = filter_entity(entity_class=TubeSampleFilterView)
+        return data
 
 
 

@@ -155,6 +155,34 @@ t_user_roles = Table(
     schema='public'
 )
 
+class TubeFilterView(Base):
+    __tablename__ = 'tube_filter_view'
+    __table_args__ = {'schema': 'public'}
+
+    id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".tubes_id_seq'::regclass)"))
+    depth = Column(Float)
+    houseId = Column(ForeignKey('public.houses.id', ondelete='CASCADE', onupdate='CASCADE'))
+    value = Column(String)
+
+
+    def to_basic_dictionary(self):
+        return {
+            'id': self.id,
+            'depth': self.depth,
+            'value': self.value,
+            'houseId': self.houseId,
+        }
+
+    def to_advanced_dictionary(self):
+        return {
+            'id': self.id,
+            'depth': self.depth,
+            'value': self.value,
+            'houseId': self.houseId,
+            'samples': [sample.to_advanced_dictionary() for sample in self.samples]
+        }
+
+
 
 class Tube(Base):
     __tablename__ = 'tubes'
@@ -183,6 +211,28 @@ class Tube(Base):
             'houseId': self.house_id,
             'samples': [sample.to_advanced_dictionary() for sample in self.samples]
         }
+
+
+class TubeSampleFilterView(Base):
+    __tablename__ = 'sample_filter_view'
+    __table_args__ = {'schema': 'public'}
+
+    id = Column('id', BigInteger, primary_key=True, server_default=text("nextval('\"public\".tube_samples_id_seq'::regclass)"))
+    depth = Column(Float)
+    value = Column(Float)
+    tubeId = Column(ForeignKey('public.tubes.id', ondelete='CASCADE', onupdate='CASCADE'))
+    date = Column(DateTime, nullable=False)
+
+    def to_basic_dictionary(self):
+        return {
+            'id': self.id,
+            'depth': self.depth,
+            'date': self.date.strftime('%d-%m-%Y'),
+            'value': self.value,
+            'tubeId': self.tubeId,
+        }
+
+
 
 
 class TubeSample(Base):

@@ -3,7 +3,9 @@ from flask_restful import Resource
 
 from core import get_database_session
 from core.auth.jwt import check_role_validation, check_validation
-from core.models import Tube
+from core.models import Tube, TubeFilterView
+
+from api.build.utils.filter import filter_entity
 
 
 class AddTube(Resource):
@@ -40,10 +42,10 @@ class ChangeTube(Resource):
     @check_role_validation(['ChangeRecord'])
     def post(self):
         json_data = request.get_json()
-        if 'tubeId' not in json_data:
+        if 'id' not in json_data:
             return jsonify({'msg': 'no_tubeId'})
 
-        tube_id = int(json_data['tubeId'])
+        tube_id = int(json_data['id'])
         db_tube = get_database_session().query(Tube).\
             filter(Tube.id == tube_id).\
             first()
@@ -72,24 +74,26 @@ class DeleteTube(Resource):
     @check_role_validation(['ChangeRecord'])
     def post(self):
         json_data = request.get_json()
-        if 'tubeId' not in json_data:
+        if 'id' not in json_data:
             return jsonify({'msg': 'no_tubeId'})
-        tube_id = int(json_data['tubeId'])
+        tube_id = int(json_data['id'])
         db_tube = get_database_session().query(Tube).\
             filter(Tube.id == tube_id).\
             first()
+
         if not db_tube:
             return jsonify({'msg': 'NO_TUBE'})
         get_database_session().delete(db_tube)
         get_database_session().commit()
+
         return jsonify({'msg': 'OK'})
 
 
 class GetTubeList(Resource):
     @check_validation
     def post(self):
-        db_tubes = get_database_session().query(Tube).all()
-        return jsonify({'tubes': [tube.to_basic_dictionary() for tube in db_tubes]})
+        data = filter_entity(entity_class=TubeFilterView)
+        return data
 
 
 class GetTube(Resource):
