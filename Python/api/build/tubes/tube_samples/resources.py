@@ -28,12 +28,12 @@ class AddSample(Resource):
         tube_id = int(json_data['tubeId'])
         date = json_data['date']
 
-        db_sample = get_database_session().query(TubeSample).\
-            filter(TubeSample.tube_id == tube_id).\
-            filter(TubeSample.date == date).first()
-        if db_sample:
-            return jsonify({'msg': 'NOT_ORIGINAL_SAMPLE'})
-        sample = TubeSample(value = value, depth = depth, tube_id = tube_id, date = date)
+        db_sample = get_database_session().query(TubeSample).first()\
+        #    filter(TubeSample.tube_id == tube_id).first()
+            #filter(TubeSample.date == datetime.strptime(date, '%d-%m-%Y').strftime('%Y-%m-%d')).first()
+        #if db_sample:
+        #    return jsonify({'msg': 'NOT_ORIGINAL_SAMPLE'})
+        sample = TubeSample(value = value, depth = depth, tube_id = tube_id, date = datetime.strptime(date, '%d-%m-%Y').strftime('%Y-%m-%d'))
 
         try:
             get_database_session().add(sample)
@@ -90,7 +90,8 @@ class ChangeSample(Resource):
         db_sample_repeat = get_database_session().query(TubeSample).\
             filter(TubeSample.date == new_date).\
             filter(TubeSample.tube_id == new_tube_id).\
-            filter(TubeSample.id != sample_id).\
+            filter(TubeSample.id != sample_id). \
+            filter(TubeSample.depth == new_depth). \
             first()
         if db_sample_repeat:
             return jsonify({'msg': 'NOT_ORIGINAL_SAMPLE'})

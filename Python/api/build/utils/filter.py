@@ -42,6 +42,9 @@ def filter_more(filter_data):
     except ValueError:
         return  -1
 
+
+
+
 def filter_less(filter_data):
     try:
         return getattr(filter_data['entity_class'], filter_data['key']) < float(filter_data['value'])
@@ -130,3 +133,39 @@ def filter_entity(entity_class):
         query = query.offset(pagination_data['currentPage'] * pagination_data['rowsPerPage'])
     all = query.all()
     return { 'count': count, 'entities': [entity.to_basic_dictionary() for entity in all] }
+
+
+
+def advanced_filter_entity(entity_class):
+    query = get_database_session().query(entity_class)
+    count = 0
+    if request.headers.get('content-type') == 'application/json':
+        json_data = request.get_json()
+        if 'filter' in json_data:
+            filter = json_data['filter']
+            if filter:
+                for filter_key, filter_array in filter.items():
+                    conditions = []
+                    for filter in filter_array:
+                        if hasattr(entity_class, filter_key):
+                            if filter['value'] != '':
+                                filter_data = {
+                                   'entity_class': entity_class,
+                                   'query': query,
+                                   'key': filter_key,
+                                   'value': filter['value']
+                                }
+
+                                if filter['type'] in filter_type_funcs:
+                                    condition = (filter_type_funcs[filter['type']](filter_data=filter_data))
+                                    if condition != -1:
+                                        conditions.append(condition)
+                    query = query.filter(or_(*conditions))
+    all = query.all()
+    count = len(all)
+    if 'pagination' in json_data:
+        pagination_data = json_data['pagination']
+        #query = query.limit(pagination_data['rowsPerPage'])
+        #query = query.offset(pagination_data['currentPage'] * pagination_data['rowsPerPage'])
+    all = query.all()
+    return { 'count': count, 'entities': [entity for entity in all] }

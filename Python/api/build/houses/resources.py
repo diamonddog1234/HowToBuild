@@ -1,9 +1,10 @@
 from flask import request, jsonify
 from flask_restful import Resource
+from numpy.ma import arange
 
-from build.utils.filter import filter_entity
+from build.utils.filter import filter_entity, advanced_filter_entity
 from core import get_database_session
-from core.models import House, Street, District, HouseFilterView
+from core.models import House, Street, District, HouseFilterView, PivotView
 
 from core.auth.jwt import check_role_validation, check_validation
 
@@ -64,6 +65,7 @@ class DeleteHouse(Resource):
         json_data = request.get_json()
         if 'id' not in json_data:
             return jsonify({'msg': 'no_id'})
+
         house_id = int(json_data['id'])
         db_house = get_database_session().query(House).\
             filter(House.id == house_id).\
@@ -149,39 +151,72 @@ class GetHouse(Resource):
         return jsonify(db_house.to_basic_dictionary())
 
 
+mouths = ['Январь', 'Февраль', 'Март', 'Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+
 class GetPivotTable(Resource):
     @check_validation
-    def post(self, house_id):
+    def post(self):
+
         json_data = request.get_json()
-        db_house = get_database_session().query(House).filter(House.id == house_id).first()
-        if not db_house:
+        pivot_view_filter = advanced_filter_entity(PivotView)
+        count = pivot_view_filter['count']
+
+        pivot_view = pivot_view_filter['entities']
+
+        if not pivot_view:
             return jsonify({'msg': 'NO_HOUSE'})
 
-        tubes = db_house.tubes
-        min = 0
+        min = 1
         max = 1
+
         result = {}
         result['entities'] = []
+        depths = []
+        samples_datekey_all = {}
+        for sample in pivot_view:
+            depths.append(sample.depth)
+            if sample.depth > max:
+                max = int(sample.depth)
+            if sample.tubeId not in samples_datekey_all:
+                samples_datekey_all[sample.tubeId] = {}
+            if 'dates' not in samples_datekey_all[sample.tubeId]:
+                samples_datekey_all[sample.tubeId]['dates'] = {}
+            samples_datekey_all[sample.tubeId]['value'] = sample.tube
+            samples_datekey_all[sample.tubeId]['houseId'] = sample.houseId
+            samples_datekey_all[sample.tubeId]['tubeId'] = sample.tubeId
+            if sample.date.strftime('%d-%m-%Y') in samples_datekey_all[sample.tubeId]['dates']:
+                count = count-1
+            samples_datekey_all[sample.tubeId]['dates'][sample.date.strftime('%d-%m-%Y')] = []
 
-        for tube in tubes:
-            samples = tube.samples
-            for sample in samples:
-                if sample.depth > max:
-                    max = sample.depth
-                elif sample.depth < min:
-                    min = sample.depth
+        depths = tuple(range(min, max+1))
 
-        for tube in tubes:
-            sample_dict = {}
-            samples = tube.samples
-            for sample in samples:
-                sample_dict['tubeId'] = tube.id
-                sample_dict['tube'] = tube.value
-                sample_dict['date'] = sample.date
-                for depth in range(min, max):
-                    if sample.depth == depth:
-                        sample_dict['depth'+depth] = sample.value
-                    else:
-                        sample_dict['depth'+depth] = 0
-            result['entities'] = []
-        return jsonify(db_house.to_basic_dictionary())
+        for sample in pivot_view:
+            for depth in depths:
+                if len(samples_datekey_all[sample.tubeId]['dates'][sample.date.strftime('%d-%m-%Y')]) < depth:
+                    samples_datekey_all[sample.tubeId]['dates'][sample.date.strftime('%d-%m-%Y')].append('-')
+                if sample.depth == depth:
+                    samples_datekey_all[sample.tubeId]['dates'][sample.date.strftime('%d-%m-%Y')][depth-1] = sample.value
+
+        result = {}
+        result['entities'] = []
+        for tube_key in samples_datekey_all:
+            for date_key in samples_datekey_all[tube_key]['dates']:
+                result['entities'].append({
+                    'quarter': int(int(date_key.split('-')[1])/4)+1,
+                    'date': date_key,
+                    'month': mouths[int(date_key.split('-')[1])-1] + ' (' + str(  int(date_key.split('-')[1])) + ')' ,
+                    'day': int(date_key.split('-')[0]),
+                    'year': int(date_key.split('-')[2]),
+                    'tube': samples_datekey_all[tube_key]['value'],
+                    'houseId': samples_datekey_all[tube_key]['houseId'],
+                    'tubeId': samples_datekey_all[tube_key]['tubeId'],
+                    'depth_values': samples_datekey_all[tube_key]['dates'][date_key]
+                })
+        result['count'] = len(result['entities'])
+        if 'pagination' in json_data:
+            pagination_data = json_data['pagination']
+            offset = pagination_data['currentPage'] * pagination_data['rowsPerPage']
+            result['entities'] = result['entities'][offset:offset+pagination_data['rowsPerPage']]
+        result['depths'] = depths
+
+        return jsonify(result)

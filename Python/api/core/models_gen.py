@@ -17,10 +17,32 @@ class District(Base):
 
 t_house_filter_view = Table(
     'house_filter_view', metadata,
-    Column('houseid', BigInteger),
+    Column('id', BigInteger),
     Column('district', String),
     Column('street', String),
     Column('number', String),
+    Column('minLayingDepth', Float),
+    Column('maxLayingDepth', Float),
+    schema='public'
+)
+
+
+t_pivot_filter_view = Table(
+    'pivot_filter_view', metadata,
+    Column('houseId', BigInteger),
+    Column('district', String),
+    Column('street', String),
+    Column('number', String),
+    Column('sampleId', BigInteger),
+    Column('date', DateTime),
+    Column('tubeId', BigInteger),
+    Column('tube', String),
+    Column('depth', Float),
+    Column('value', Float),
+    Column('quarter', BigInteger),
+    Column('month', BigInteger),
+    Column('day', BigInteger),
+    Column('year', BigInteger),
     schema='public'
 )
 
@@ -38,6 +60,10 @@ t_pivot_view = Table(
     Column('id', BigInteger),
     Column('depth', Float),
     Column('value', Float),
+    Column('quarter', BigInteger),
+    Column('month', BigInteger),
+    Column('day', BigInteger),
+    Column('year', BigInteger),
     schema='public'
 )
 
@@ -52,12 +78,33 @@ class Role(Base):
     users = relationship('User', secondary='public.user_roles')
 
 
+t_sample_filter_view = Table(
+    'sample_filter_view', metadata,
+    Column('id', BigInteger),
+    Column('depth', Float),
+    Column('value', Float),
+    Column('tubeId', BigInteger),
+    Column('date', DateTime),
+    schema='public'
+)
+
+
 class Street(Base):
     __tablename__ = 'streets'
     __table_args__ = {'schema': 'public'}
 
     id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".streets_id_seq'::regclass)"))
     value = Column(String, nullable=False)
+
+
+t_tube_filter_view = Table(
+    'tube_filter_view', metadata,
+    Column('id', BigInteger),
+    Column('depth', Float),
+    Column('houseId', BigInteger),
+    Column('value', String),
+    schema='public'
+)
 
 
 class User(Base):
@@ -99,7 +146,7 @@ class Tube(Base):
 
     id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".tubes_id_seq'::regclass)"))
     depth = Column(Float)
-    house_id = Column(ForeignKey('public.houses.id', ondelete='CASCADE', onupdate='CASCADE'))
+    house_id = Column(ForeignKey('public.houses.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
     value = Column(String)
 
     house = relationship('House')
@@ -112,7 +159,7 @@ class TubeSample(Base):
     id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".tube_samples_id_seq'::regclass)"))
     depth = Column(Float)
     value = Column(Float)
-    tube_id = Column(ForeignKey('public.tubes.id', ondelete='CASCADE', onupdate='CASCADE'))
+    tube_id = Column(ForeignKey('public.tubes.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
     date = Column(DateTime, nullable=False)
 
     tube = relationship('Tube')

@@ -12,7 +12,6 @@ from core import get_database_session, get_rest_api
 
 _jwt = None        # type: JWTManager
 
-
 def get_jwt() -> JWTManager:
     global _jwt
     if not _jwt:
@@ -80,6 +79,7 @@ def check_role_validation(roles = []):
         def wrapper(*args, **kwargs):
             get_database_session()
             identity = get_jwt_identity()
+
             if 'user_id' not in identity:
                 return show_error_func('no user_id in token')
             if 'token_id' not in identity:

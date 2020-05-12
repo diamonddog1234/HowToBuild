@@ -1,4 +1,4 @@
-from build.houses.resources import AddHouse, GetHouseList, GetHouse
+from build.houses.resources import AddHouse, GetHouseList, GetHouse, GetPivotTable
 from build.houses.resources import DeleteHouse
 from build.houses.resources import ChangeHouse
 
@@ -8,4 +8,5 @@ urls = [
     (ChangeHouse, '/api/houses/change'),
     (GetHouseList, '/api/houses/list'),
     (GetHouse, '/api/houses/<int:house_id>'),
+    (GetPivotTable, '/api/houses/pivot')
 ]

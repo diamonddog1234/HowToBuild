@@ -99,7 +99,7 @@ class House(Base):
     district = relationship('District')
     street = relationship('Street')
 
-    tubes = relationship('Tube', backref='house')
+    tubes = relationship('Tube', cascade="all,delete", backref='house')
 
 
 
@@ -190,10 +190,9 @@ class Tube(Base):
 
     id = Column(BigInteger, primary_key=True, server_default=text("nextval('\"public\".tubes_id_seq'::regclass)"))
     depth = Column(Float)
-    house_id = Column(ForeignKey('public.houses.id', ondelete='CASCADE', onupdate='CASCADE'))
+    house_id = Column(BigInteger, ForeignKey('public.houses.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
     value = Column(String)
-    samples = relationship('TubeSample', backref='tube')
-
+    samples = relationship('TubeSample', cascade="all,delete", backref='tube')
 
     def to_basic_dictionary(self):
         return {
@@ -253,4 +252,24 @@ class TubeSample(Base):
             'date': self.date.strftime('%d-%m-%Y'),
             'value': self.value,
         }
+
+
+
+class PivotView(Base):
+    __tablename__ = 'pivot_filter_view'
+    __table_args__ = {'schema': 'public'}
+
+    houseId = Column(BigInteger, primary_key=True)
+    tubeId = Column(BigInteger, primary_key=True)
+    sampleId = Column(BigInteger, primary_key=True)
+    tube = Column(String)
+    date = Column(DateTime, nullable=False)
+    depth = Column(Float)
+    value = Column(Float)
+    quarter = Column(BigInteger)
+    month = Column(BigInteger)
+    day = Column(BigInteger)
+    year = Column(BigInteger)
+
+
 

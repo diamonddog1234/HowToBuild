@@ -1,3 +1,4 @@
+from build.houses.resources import GetPivotTable
 from build.tubes.resources import AddTube, DeleteTube, ChangeTube, GetTubeList, GetTube
 from build.tubes.tube_samples.resources import AddSample, ChangeSample, DeleteSample, GetSampleList, GetSample
 
@@ -13,4 +14,6 @@ urls = [
     (DeleteSample, '/api/tubes/samples/delete'),
     (GetSampleList, '/api/tubes/samples/list'),
     (GetSample, '/api/tubes/samples/<int:sample_id>'),
+
+
 ]

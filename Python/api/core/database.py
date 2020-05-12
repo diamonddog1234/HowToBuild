@@ -8,6 +8,7 @@ _database = None  # type: SQLAlchemy
 Base = declarative_base()
 metadata = Base.metadata
 
+
 def get_database() -> SQLAlchemy:
     global _database
     if not _database:
