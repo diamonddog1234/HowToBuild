@@ -1,5 +1,5 @@
 # coding: utf-8
-from sqlalchemy import BigInteger, Column, DateTime, Float, ForeignKey, String, Table, text
+from sqlalchemy import ARRAY, BigInteger, Column, DateTime, Float, ForeignKey, Integer, SmallInteger, String, Table, Text, text
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -68,6 +68,36 @@ t_pivot_view = Table(
 )
 
 
+class PlanetOsmNode(Base):
+    __tablename__ = 'planet_osm_nodes'
+    __table_args__ = {'schema': 'public'}
+
+    id = Column(BigInteger, primary_key=True)
+    lat = Column(Integer, nullable=False)
+    lon = Column(Integer, nullable=False)
+
+
+class PlanetOsmRel(Base):
+    __tablename__ = 'planet_osm_rels'
+    __table_args__ = {'schema': 'public'}
+
+    id = Column(BigInteger, primary_key=True)
+    way_off = Column(SmallInteger)
+    rel_off = Column(SmallInteger)
+    parts = Column(ARRAY(BigInteger()), index=True)
+    members = Column(ARRAY(Text()))
+    tags = Column(ARRAY(Text()))
+
+
+class PlanetOsmWay(Base):
+    __tablename__ = 'planet_osm_ways'
+    __table_args__ = {'schema': 'public'}
+
+    id = Column(BigInteger, primary_key=True)
+    nodes = Column(ARRAY(BigInteger()), nullable=False, index=True)
+    tags = Column(ARRAY(Text()))
+
+
 class Role(Base):
     __tablename__ = 'roles'
     __table_args__ = {'schema': 'public'}
@@ -127,6 +157,9 @@ class House(Base):
     district_id = Column(ForeignKey('public.districts.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
     min_laying_depth = Column(Float)
     max_laying_depth = Column(Float)
+    lat = Column(Float(53))
+    lng = Column(Float(53))
+    build_day = Column(Integer)
 
     district = relationship('District')
     street = relationship('Street')

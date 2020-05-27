@@ -15,21 +15,21 @@ class AddHouse(Resource):
         json_data = request.get_json()
         if 'street' not in json_data:
             return jsonify({'msg': 'no_street'})
+        print(json_data)
         if 'district' not in json_data:
             return jsonify({'msg': 'no_district'})
-        if 'minLayingDepth' not in json_data:
-            return jsonify({'msg': 'no_minLayingDepth'})
-        if 'maxLayingDepth' not in json_data:
-            return jsonify({'msg': 'maxLayingDepth'})
+        #if 'minLayingDepth' not in json_data:
+        #    return jsonify({'msg': 'no_minLayingDepth'})
+        #if 'maxLayingDepth' not in json_data:
+        #    return jsonify({'msg': 'maxLayingDepth'})
         if 'number' not in json_data:
             return jsonify({'msg': 'no_number'})
 
         street = json_data['street']
         district = json_data['district']
-        min_laying_depth = float(json_data['minLayingDepth'])
-        max_laying_depth = float(json_data['maxLayingDepth'])
-        number = str(json_data['number'])
 
+        number = str(json_data['number'])
+      
         db_street = get_database_session().query(Street).filter(Street.value == street).first()
         if not db_street:
             db_street = Street(value = street)
@@ -46,12 +46,26 @@ class AddHouse(Resource):
             filter(House.district_id == db_district.id).\
             filter(House.number == number).\
             first()
+
         if not db_house:
             house = House(street_id=db_street.id,
                           district_id=db_district.id,
-                          min_laying_depth=min_laying_depth,
-                          max_laying_depth=max_laying_depth,
                           number = number)
+
+            if 'buildYear' in json_data:
+                house.build_year = int(json_data['buildYear'])
+
+            if 'lng' in json_data:
+                house.lng = json_data['lng']
+
+            if 'lat' in json_data:
+                house.lat = json_data['lat']
+
+            if 'minLayingDepth' in json_data:
+                house.min_laying_depth = float(json_data['minLayingDepth'])
+            if 'maxLayingDepth' in json_data:
+                house.max_laying_depth = float(json_data['maxLayingDepth'])
+
             get_database_session().add(house)
             get_database_session().commit()
         else:
@@ -94,7 +108,7 @@ class ChangeHouse(Resource):
         new_min_laying_depth = db_house.min_laying_depth
         new_max_laying_depth = db_house.max_laying_depth
         new_number = db_house.number
-
+        new_build_year = db_house.build_year
         if 'street' in json_data:
             new_street = get_database_session().query(Street).filter(Street.value == json_data['street']).first()
             if not new_street:
@@ -114,7 +128,8 @@ class ChangeHouse(Resource):
             new_max_laying_depth = json_data['maxLayingDepth']
         if 'number' in json_data:
             new_number = json_data['number']
-
+        if json_data['buildYear']:
+            new_build_year = int(json_data['buildYear'])
         db_house_repeat = get_database_session().query(House).\
             filter(House.street_id == new_street.id).\
             filter(House.district_id == new_district.id).\
@@ -130,6 +145,7 @@ class ChangeHouse(Resource):
         db_house.number = new_number
         db_house.min_laying_depth = new_min_laying_depth
         db_house.max_laying_depth = new_max_laying_depth
+        db_house.build_year = new_build_year
         get_database_session().commit()
         return jsonify({'msg': 'OK'})
 

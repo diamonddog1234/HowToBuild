@@ -1,6 +1,6 @@
 from random import random
 import jwt
-from Tools.scripts.parse_html5_entities import get_json
+
 from flask import request, jsonify
 from flask_jwt_extended import create_access_token, get_jwt_identity
 from flask_restful import Resource
@@ -13,6 +13,10 @@ from core.auth.jwt import check_validation, check_validation_with_user, check_ro
 class CheckUser(Resource):
     @check_validation_with_user
     def post(self, user):
+        role_array = user.role_string_array
+        for role_from_json in request.get_json()['roles']:
+            if role_from_json not in role_array:
+                return jsonify({'msg': 'wrong'})
         return jsonify({'msg': 'OK', 'user_id':user.id})
 
 

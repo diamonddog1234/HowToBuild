@@ -1,5 +1,5 @@
 # coding: utf-8
-from sqlalchemy import BigInteger, Column, DateTime, Float, ForeignKey, String, Table, text
+from sqlalchemy import BigInteger, Column, DateTime, Float, ForeignKey, String, Table, text, Integer
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -96,6 +96,10 @@ class House(Base):
     min_laying_depth = Column(Float)
     max_laying_depth = Column(Float)
 
+    lat = Column(Float(53))
+    lng = Column(Float(53))
+    build_year = Column(Integer)
+
     district = relationship('District')
     street = relationship('Street')
 
@@ -111,6 +115,9 @@ class House(Base):
             'minLayingDepth': self.min_laying_depth,
             'maxLayingDepth': self.max_laying_depth,
             'number': self.number,
+            'buildYear': self.build_year,
+            'lat': self.lat,
+            'lng': self.lng,
         }
 
     def to_advanced_dictionary(self):
@@ -136,6 +143,10 @@ class HouseFilterView(Base):
     minLayingDepth = Column(Float)
     maxLayingDepth = Column(Float)
 
+    lat = Column(Float(53))
+    lng = Column(Float(53))
+    buildYear = Column(Integer)
+
     def to_basic_dictionary(self):
         return {
             'id': self.id,
@@ -144,6 +155,9 @@ class HouseFilterView(Base):
             'minLayingDepth': self.minLayingDepth,
             'maxLayingDepth': self.maxLayingDepth,
             'number': self.number,
+            'buildYear': self.buildYear,
+            'lat': self.lat,
+            'lng': self.lng,
         }
 
 

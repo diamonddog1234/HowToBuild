@@ -5,7 +5,7 @@ from core import get_database_session
 from core.auth.jwt import check_role_validation, check_validation
 from core.models import Tube, TubeFilterView
 
-from api.build.utils.filter import filter_entity
+from build.utils.filter import filter_entity
 
 
 class AddTube(Resource):

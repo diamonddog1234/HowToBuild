@@ -127,6 +127,7 @@ def filter_entity(entity_class):
                     query = query.filter(or_(*conditions))
     all = query.all()
     count = len(all)
+    print(json_data)
     if 'pagination' in json_data:
         pagination_data = json_data['pagination']
         query = query.limit(pagination_data['rowsPerPage'])
